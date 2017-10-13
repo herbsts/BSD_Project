@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">BoostIt</string>
+    <string name="btnLogin">Log in</string>
+    <string name="home">Home</string>
+    <string name="open_drawer">Open</string>
+    <string name="close_drawer">Close</string>
+
+    <string-array name="navigation_drawer_items_array">
+        <item>Connect</item>
+        <item>Fixtures</item>
+        <item>Table</item>
+    </string-array>
 </resources>
