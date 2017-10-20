@@ -15,4 +15,8 @@ public class DataModel {
         this.icon = icon;
         this.name = name;
     }
+
+    public DataModel(String name){
+        this.name = name;
+    }
 }

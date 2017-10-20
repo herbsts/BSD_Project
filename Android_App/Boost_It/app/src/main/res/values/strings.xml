@@ -6,7 +6,7 @@
     <string name="close_drawer">Close</string>
 
     <string-array name="navigation_drawer_items_array">
-        <item>Connect</item>
+        <item>Home</item>
         <item>Fixtures</item>
         <item>Table</item>
     </string-array>
