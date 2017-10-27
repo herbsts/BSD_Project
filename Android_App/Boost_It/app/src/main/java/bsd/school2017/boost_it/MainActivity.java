@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import bsd.school2017.boost_it.pkgAdapter.DataModel;
 import bsd.school2017.boost_it.pkgAdapter.DrawerItemCustomAdapter;
+import bsd.school2017.boost_it.pkgFragments.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         DataModel[] drawerItem = new DataModel[3];
 
-        /*drawerItem[0] = new DataModel(R.drawable.connect, "Connect");
-        drawerItem[1] = new DataModel(R.drawable.fixtures, "Fixtures");
-        drawerItem[2] = new DataModel(R.drawable.table, "Table");*/
+        drawerItem[0] = new DataModel("Home");
+        drawerItem[1] = new DataModel("Units");
+        drawerItem[2] = new DataModel("Impressum");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -66,20 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment fragment = null;
 
-       /* switch (position) {
+        switch (position) {
             case 0:
-                fragment = new ConnectFragment();
+                fragment = new MainFragment();
                 break;
-            case 1:
-                fragment = new FixturesFragment();
-                break;
-            case 2:
-                fragment = new TableFragment();
-                break;
-
             default:
                 break;
-        }*/
+        }
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
