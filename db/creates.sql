@@ -1,5 +1,5 @@
-DROP TABLE Requests CASCADE CONSTRAINTS;
 DROP TABLE Users CASCADE CONSTRAINTS;
+DROP TABLE Requests CASCADE CONSTRAINTS;
 DROP TABLE belongsTo CASCADE CONSTRAINTS;
 DROP TABLE Units CASCADE CONSTRAINTS;
 DROP TABLE Words CASCADE CONSTRAINTS;
@@ -9,6 +9,14 @@ DROP TABLE ownsPhrase CASCADE CONSTRAINTS;
 DROP TABLE wordBelongs CASCADE CONSTRAINTS;
 DROP TABLE phraseBelongs CASCADE CONSTRAINTS;
 
+CREATE TABLE Users(
+	user_id 	INTEGER,
+	username 	VARCHAR2(30),
+	password	VARCHAR2(15),
+	role		INTEGER,
+  
+  CONSTRAINT pk_Users PRIMARY KEY (user_id)
+);
 
 CREATE TABLE Requests(
 	req_id 		INTEGER,
@@ -21,20 +29,14 @@ CREATE TABLE Requests(
 	CONSTRAINT fk_Requests FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-CREATE TABLE Users(
-	user_id 	INTEGER,
-	username 	VARCHAR2(30),
-	password	VARCHAR2(15),
-	role		INTEGER,
-);
-
 CREATE TABLE belongsTo(
 	user_id 	INTEGER,
 	teacher_id 	INTEGER,
-	
+	class VARCHAR2(10),
+  
 	CONSTRAINT pk_BelongsTo PRIMARY KEY (user_id, teacher_id),
 	CONSTRAINT fk_BelongsToUser FOREIGN KEY (user_id) REFERENCES Users(user_id),
-	CONSTRAINT fk_BelongsToTeacher FOREIGN KEY (teacher_id) REFERENCES Users(user_id),
+	CONSTRAINT fk_BelongsToTeacher FOREIGN KEY (teacher_id) REFERENCES Users(user_id)
 );
 
 CREATE TABLE Units(
@@ -64,7 +66,7 @@ CREATE TABLE Phrases(
 	word_id 	INTEGER,
 	
 	CONSTRAINT pk_Phrases PRIMARY KEY (phrase_id),
-	CONSTRAINT fk_PhrasesWord FOREIGN KEY (word_id) REFERENCES Word(word_id)
+	CONSTRAINT fk_PhrasesWord FOREIGN KEY (word_id) REFERENCES Words(word_id)
 );
 
 CREATE TABLE ownsWord(
@@ -76,7 +78,7 @@ CREATE TABLE ownsWord(
 	
 	CONSTRAINT pk_OwnsWord PRIMARY KEY (id),
 	CONSTRAINT fk_OwnsWordUser FOREIGN KEY (user_id) REFERENCES Users(user_id),
-	CONSTRAINT fk_OwnsWordWord FOREIGN KEY (word_id) REFERENCES Word(word_id),
+	CONSTRAINT fk_OwnsWordWord FOREIGN KEY (word_id) REFERENCES Words(word_id)
 );
 
 CREATE TABLE ownsPhrase(
@@ -88,7 +90,7 @@ CREATE TABLE ownsPhrase(
 	
 	CONSTRAINT pk_OwnsPhrase PRIMARY KEY (id),
 	CONSTRAINT fk_OwnsPhraseUser FOREIGN KEY (user_id) REFERENCES Users(user_id),
-	CONSTRAINT fk_OwnsPhrasePhrase FOREIGN KEY (phrase_id) REFERENCES Phrases(word_id)
+	CONSTRAINT fk_OwnsPhrasePhrase FOREIGN KEY (phrase_id) REFERENCES Phrases(phrase_id)
 );
 
 CREATE TABLE wordBelongs(
@@ -97,7 +99,7 @@ CREATE TABLE wordBelongs(
 	
 	CONSTRAINT pk_WordBelongs PRIMARY KEY (word_id, unit_id),
 	CONSTRAINT fk_WordBelongsWord FOREIGN KEY (word_id) REFERENCES Words(word_id),
-	CONSTRAINT fk_WordBelongsUnit FOREIGN KEY (unit_id) REFERENCES Unit(unit_id)
+	CONSTRAINT fk_WordBelongsUnit FOREIGN KEY (unit_id) REFERENCES Units(unit_id)
 );
 
 CREATE TABLE phraseBelongs(
@@ -106,5 +108,5 @@ CREATE TABLE phraseBelongs(
 	
 	CONSTRAINT pk_PhraseBelongs PRIMARY KEY (phrase_id, unit_id),
 	CONSTRAINT fk_PhraseBelongsPhrase FOREIGN KEY (phrase_id) REFERENCES Phrases(phrase_id),
-	CONSTRAINT fk_PhraseBelongsUnit FOREIGN KEY (unit_id) REFERENCES Unit(unit_id)
+	CONSTRAINT fk_PhraseBelongsUnit FOREIGN KEY (unit_id) REFERENCES Units(unit_id)
 );
