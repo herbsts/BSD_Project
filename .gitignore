@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/BoostIt_Web/BoostIt/nbproject/private/
