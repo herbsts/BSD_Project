@@ -26,7 +26,25 @@ namespace BoostIt_Desktop
 
         private void OnBtnLoginClick(object sender, RoutedEventArgs e)
         {
-            
+            if(txtUsername.Text.Length > 0 && txtUsername.Text.Length > 0)
+            {
+                string retVal = Database.GetInstance().ChkLogin(txtUsername.Text, txtPassword.Password);
+                if(retVal != null)
+                {
+                    Database.GetInstance().SetUser(txtUsername.Text, txtPassword.Password);
+                    Dashboard d = new Dashboard(txtUsername.Text);
+                    d.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Error: No user '" + txtUsername.Text + "' found!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Enter a username and password to continue!");
+            }
         }
     }
 }

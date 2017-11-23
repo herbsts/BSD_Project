@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 namespace BoostIt_Desktop
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class Dashboard : Window
     {
-        public Login()
+        public Dashboard(string username)
         {
             InitializeComponent();
+            lblWelcome.Content = "Welcome " + username + "!";
         }
     }
 }

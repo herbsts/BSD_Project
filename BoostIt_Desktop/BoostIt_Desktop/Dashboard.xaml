@@ -1,0 +1,13 @@
+﻿<Window x:Class="BoostIt_Desktop.Dashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BoostIt_Desktop"
+        mc:Ignorable="d"
+        Title="Dashboard - BoostIt" Height="720" Width="1280">
+    <Grid>
+        <Image Height="145" Margin="536.8,80.52,536.8,0" VerticalAlignment="Top" Source="pack://application:,,,../Resources/Logo_BoostIT.png"/>
+        <Label x:Name="lblWelcome" Content="Welcome" Margin="377,271,377,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Foreground="White" Background="#006747" HorizontalContentAlignment="Center"/>
+    </Grid>
+</Window>
