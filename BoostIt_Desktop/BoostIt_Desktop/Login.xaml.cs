@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace BoostIt_Desktop
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class Login : Window
     {

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BoostIt_Desktop"
         mc:Ignorable="d"
-        Title="Login" Height="300" Width="300">
+        Title="Login - BoostIt" Height="720" Width="1280">
     <Grid>
-        
+        <Image HorizontalAlignment="Left" Height="100" Margin="590,41,0,0" VerticalAlignment="Top" Width="100" Source="../Resources/Logo_BoostIT.png"/>
     </Grid>
 </Window>
