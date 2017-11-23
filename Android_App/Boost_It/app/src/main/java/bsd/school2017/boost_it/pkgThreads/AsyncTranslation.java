@@ -3,10 +3,6 @@ package bsd.school2017.boost_it.pkgThreads;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -17,6 +13,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by Martin on 20.10.2017.
  */
 public class AsyncTranslation extends AsyncTask<String, Integer, String> {
+    public IAsyncTaskResponse delegate = null;
 
     @Override
     protected String doInBackground(String... params) {
@@ -25,9 +22,9 @@ public class AsyncTranslation extends AsyncTask<String, Integer, String> {
         try {
             URL url = new URL(params[0]);
             HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-            urlConnection.setRequestProperty("Accept","application/json");
-            urlConnection.setRequestProperty("app_id",app_id);
-            urlConnection.setRequestProperty("app_key",app_key);
+            urlConnection.setRequestProperty("Accept", "application/json");
+            urlConnection.setRequestProperty("app_id", app_id);
+            urlConnection.setRequestProperty("app_key", app_key);
 
             // read the output from the server
             BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -40,8 +37,7 @@ public class AsyncTranslation extends AsyncTask<String, Integer, String> {
 
             return stringBuilder.toString();
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return e.toString();
         }
@@ -49,10 +45,10 @@ public class AsyncTranslation extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        super.onPostExecute(result);
         String translation = null;
         try {
-            JSONObject js = new JSONObject(result);
+            Log.e("test", result);
+            /*JSONObject js = new JSONObject(result);
             JSONArray results = js.getJSONArray("results");
             for(int i = 0;i<results.length();i++){
                 JSONObject lentries = results.getJSONObject(i);
@@ -68,10 +64,11 @@ public class AsyncTranslation extends AsyncTask<String, Integer, String> {
                         translation = de.getString(0);
                     }
                 }
-            }
-            Log.e("def", translation);
+            }*/
+            delegate.processFinish(result);
+            Log.e("def", result);
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
