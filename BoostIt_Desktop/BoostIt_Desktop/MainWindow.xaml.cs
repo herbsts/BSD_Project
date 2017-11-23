@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BoostIt_Desktop
@@ -23,6 +22,11 @@ namespace BoostIt_Desktop
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OnBtnLoginClick(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
