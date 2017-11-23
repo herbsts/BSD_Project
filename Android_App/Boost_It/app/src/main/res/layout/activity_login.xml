@@ -13,7 +13,7 @@
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
+        style=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -25,7 +25,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/email_login_form"
+            android:id="@+id/login_form2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -35,11 +35,11 @@
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
-                    android:id="@+id/email"
+                    android:id="@+id/edtUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
+                    android:hint="@string/prompt_username"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/edtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
@@ -64,8 +64,8 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
+                android:id="@+id/btnLogin"
+                style=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

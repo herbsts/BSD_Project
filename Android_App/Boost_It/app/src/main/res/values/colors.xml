@@ -4,4 +4,7 @@
     <color name="colorAccent">#006747</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="white">#FFFFFF</color>
+
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
 </resources>
