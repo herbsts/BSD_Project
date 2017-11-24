@@ -47,10 +47,12 @@ public class BoostItClient extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet BoostItClient at " + request.getContextPath() + "</h1>");
             try {
-                int i = Integer.parseInt(request.getParameter("numberI"));
-                int j = Integer.parseInt(request.getParameter("numberJ"));
-                int result = add(i, j);
-                out.println("Result = " + result);
+                if (request.getParameter("loginbutton") != null) {
+                    String username = request.getParameter("username");
+                    String password = request.getParameter("password");
+                    String success = login(username, password);
+                    out.println("User " + username + success);
+                }
             } catch (Exception ex) {
                 out.println("Exception: " + ex);
             }
@@ -98,11 +100,11 @@ public class BoostItClient extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private int add(int i, int j) {
+    private String login(java.lang.String username, java.lang.String password) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservice.BoostItWS port = service.getBoostItWSPort();
-        return port.add(i, j);
+        return port.login(username, password);
     }
 
 }

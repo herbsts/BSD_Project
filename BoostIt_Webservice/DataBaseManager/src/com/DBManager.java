@@ -7,11 +7,11 @@ import java.sql.Statement;
 
 public class DBManager {
 
-    private static String urlIntern = "jdbc:oracle:thin:@192.168.193.136:1521:ora11g";
+    private static String urlIntern = "jdbc:oracle:thin:@192.168.128.152:1521:ora11g";
     private static String urlExtern = "jdbc:oracle:thin:@212.152.179.117:1521:ora11g";
     private static String driver = "oracle.jdbc.driver.OracleDriver";
-    private static String user = "admin";
-    private static String pwd = "admin";
+    private static String user = "d5b12";
+    private static String pwd = "d5b";
 
     private static boolean instanceExists = false;
 

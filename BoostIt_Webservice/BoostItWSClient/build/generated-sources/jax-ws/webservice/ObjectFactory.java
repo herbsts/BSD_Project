@@ -26,6 +26,8 @@ public class ObjectFactory {
 
     private final static QName _Add_QNAME = new QName("http://webservice/", "add");
     private final static QName _AddResponse_QNAME = new QName("http://webservice/", "addResponse");
+    private final static QName _Login_QNAME = new QName("http://webservice/", "login");
+    private final static QName _LoginResponse_QNAME = new QName("http://webservice/", "loginResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservice
@@ -51,6 +53,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Login }
+     * 
+     */
+    public Login createLogin() {
+        return new Login();
+    }
+
+    /**
+     * Create an instance of {@link LoginResponse }
+     * 
+     */
+    public LoginResponse createLoginResponse() {
+        return new LoginResponse();
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Add }{@code >}}
      * 
      */
@@ -66,6 +84,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice/", name = "addResponse")
     public JAXBElement<AddResponse> createAddResponse(AddResponse value) {
         return new JAXBElement<AddResponse>(_AddResponse_QNAME, AddResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice/", name = "login")
+    public JAXBElement<Login> createLogin(Login value) {
+        return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice/", name = "loginResponse")
+    public JAXBElement<LoginResponse> createLoginResponse(LoginResponse value) {
+        return new JAXBElement<LoginResponse>(_LoginResponse_QNAME, LoginResponse.class, null, value);
     }
 
 }
