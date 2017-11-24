@@ -1,7 +1,7 @@
 package bsd.school2017.boost_it.pkgWebService;
 
 /**
- * @author Wilscher Marco
+ * @author Martin on 23.11.2017.
  */
 
 public enum HttpMethod {

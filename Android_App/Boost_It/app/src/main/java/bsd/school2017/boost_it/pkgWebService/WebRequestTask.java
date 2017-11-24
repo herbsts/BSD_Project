@@ -12,7 +12,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 /**
- * @author Marco Wilscher
+ * @author Martin on 23.11.2017.
  */
 
 public final class WebRequestTask extends AsyncTask <RequestParameter, Void, AccessorResponse> {
