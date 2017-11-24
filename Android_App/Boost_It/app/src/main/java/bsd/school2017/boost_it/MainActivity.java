@@ -1,5 +1,6 @@
 package bsd.school2017.boost_it;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import bsd.school2017.boost_it.pkgActivities.LoginActivity;
 import bsd.school2017.boost_it.pkgThreads.AsyncTranslation;
 import bsd.school2017.boost_it.pkgThreads.IAsyncTaskResponse;
 
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Runs at you", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Send Request?", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -132,9 +134,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_home) {
-            setContentView(R.layout.activity_main);
+            openActivity(MainActivity.class);
         } else if (id == R.id.nav_units) {
-            setContentView(R.layout.activity_login);
+            openActivity(LoginActivity.class);
         } else if (id == R.id.nav_settings) {
 
         }
@@ -142,5 +144,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void openActivity(Class toOpen) {
+        Intent myIntent = new Intent(this, toOpen);
+        this.startActivity(myIntent);
     }
 }
