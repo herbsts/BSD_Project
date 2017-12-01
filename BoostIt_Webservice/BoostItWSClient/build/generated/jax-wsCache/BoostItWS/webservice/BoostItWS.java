@@ -26,6 +26,24 @@ public interface BoostItWS {
 
     /**
      * 
+     * @param password
+     * @param username
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "login", targetNamespace = "http://webservice/", className = "webservice.Login")
+    @ResponseWrapper(localName = "loginResponse", targetNamespace = "http://webservice/", className = "webservice.LoginResponse")
+    @Action(input = "http://webservice/BoostItWS/loginRequest", output = "http://webservice/BoostItWS/loginResponse")
+    public String login(
+        @WebParam(name = "username", targetNamespace = "")
+        String username,
+        @WebParam(name = "password", targetNamespace = "")
+        String password);
+
+    /**
+     * 
      * @param i
      * @param j
      * @return
