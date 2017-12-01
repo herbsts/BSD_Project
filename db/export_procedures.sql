@@ -6,7 +6,7 @@
 --------------------------------------------------------
 set define off;
 
-  CREATE OR REPLACE PROCEDURE "D5B12"."PRO_LOG" 
+  CREATE OR REPLACE PROCEDURE "BOOSTL"."PRO_LOG" 
 (
   MESSAGE IN VARCHAR2 
 ) AS 
@@ -20,7 +20,7 @@ END PRO_LOG;
 --------------------------------------------------------
 set define off;
 
-  CREATE OR REPLACE PROCEDURE "D5B12"."PRO_SET_ACCURACY_PHRASES" 
+  CREATE OR REPLACE PROCEDURE "BOOSTL"."PRO_SET_ACCURACY_PHRASES" 
 ( days IN INTEGER DEFAULT 2,
   decrease IN INTEGER DEFAULT 5)
 AS 
@@ -43,7 +43,7 @@ END PRO_SET_ACCURACY_PHRASES;
 --------------------------------------------------------
 set define off;
 
-  CREATE OR REPLACE PROCEDURE "D5B12"."PRO_SET_ACCURACY_WORDS" 
+  CREATE OR REPLACE PROCEDURE "BOOSTL"."PRO_SET_ACCURACY_WORDS" 
 ( days IN INTEGER DEFAULT 2,
   decrease IN INTEGER DEFAULT 5)
 AS 
@@ -66,7 +66,7 @@ END PRO_SET_ACCURACY_WORDS;
 --------------------------------------------------------
 set define off;
 
-  CREATE OR REPLACE PROCEDURE "D5B12"."PRO_SET_ACURACY_WORDS" 
+  CREATE OR REPLACE PROCEDURE "BOOSTL"."PRO_SET_ACURACY_WORDS" 
 ( days IN INTEGER DEFAULT 2,
   decrease IN INTEGER DEFAULT 5)
 AS 
