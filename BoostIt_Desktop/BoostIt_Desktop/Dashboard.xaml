@@ -9,5 +9,10 @@
     <Grid>
         <Image Height="145" Margin="536.8,80.52,536.8,0" VerticalAlignment="Top" Source="pack://application:,,,../Resources/Logo_BoostIT.png"/>
         <Label x:Name="lblWelcome" Content="Welcome" Margin="377,271,377,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Foreground="White" Background="#006747" HorizontalContentAlignment="Center"/>
+        <DockPanel HorizontalAlignment="Left" Height="670" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="100">
+            <Button HorizontalAlignment="Stretch" Content="Button" Height="43" VerticalAlignment="Top" Width="75"/>
+            <Button HorizontalAlignment="Stretch" Content="Button" Height="43" VerticalAlignment="Bottom" Width="75"/>
+        </DockPanel>
+
     </Grid>
 </Window>

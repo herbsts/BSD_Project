@@ -8,13 +8,13 @@
         mc:Ignorable="d"
         Title="Login - BoostL" Height="720" Width="1280" Background="#006747">
     <Grid Margin="0,0,-0.4,0.4">
-        <Image Height="145" Margin="536.8,80.52,536.8,0" VerticalAlignment="Top" Source="pack://application:,,,../Resources/Logo_BoostIT.png"/>
+        <Image Margin="537,81,537,0" Source="pack://application:,,,../Resources/Logo_BoostIT.png" Height="145" VerticalAlignment="Top"/>
         <Label HorizontalAlignment="Left" Margin="332,385,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblInfo" Content="Enter Username and Password to continue: " Margin="377,271,377,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Background="#FFFFFF" HorizontalContentAlignment="Center"/>
-        <Label x:Name="lblUsername" Content="Username: " HorizontalAlignment="Left" Margin="467,338,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Background="#FFFFFF" HorizontalContentAlignment="Center"/>
-        <Label x:Name="lblPassword" Content="Password: " HorizontalAlignment="Left" Margin="467,389,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Background="#FFFFFF" Width="115" HorizontalContentAlignment="Center"/>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="36" Margin="597,338,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="20" FontWeight="Bold"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Height="37" Margin="597,389,0,0" VerticalAlignment="Top" Width="200" FontSize="20" FontWeight="Bold"/>
-        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="597,451,0,0" VerticalAlignment="Top" Width="200" FontSize="22" FontWeight="Bold" Background="LightGreen" Height="40" Click="OnBtnLoginClick"/>
+        <Label x:Name="lblInfo" Content="Enter Username and Password to continue: " Margin="377,271,377,0" FontSize="24" FontWeight="Bold" Background="#FFFFFF" HorizontalContentAlignment="Center" Height="42" VerticalAlignment="Top"/>
+        <Label x:Name="lblUsername" Content="Username: " Margin="467,337,0,0" FontSize="20" FontWeight="Bold" Background="#FFFFFF" HorizontalContentAlignment="Center" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="115"/>
+        <Label x:Name="lblPassword" Content="Password: " Margin="467,389,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Background="#FFFFFF" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="115"/>
+        <TextBox x:Name="txtUsername" Margin="597,338,477,0" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" Height="36" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="txtPassword" Height="37" Margin="597,389,477,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+        <Button x:Name="btnLogin" Content="Login" Margin="597,451,477,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" Background="LightGreen" Height="40" Click="OnBtnLoginClick"/>
     </Grid>
 </Window>
