@@ -1,0 +1,16 @@
+IP-Addresse in der Schule: 192.168.195.35
+
+USERS:
+Get all users		192.168.x.x:8080/BoostIt/WS/UserList
+Get user by id		192.168.x.x:8080/BoostIt/WS/UserDetail/{id}
+Add/Update/Delete user	192.168.x.x:8080/BoostIt/WS/UserDetail
+
+WORDS:
+Get the word		192.168.x.x:8080/BoostIt/WS/WordDetail/{id}   //Geht noch nicht
+
+UNITS:
+Get all units		192.168.x.x:8080/BoostIt/WS/UnitList
+Get unit by id		192.168.x.x:8080/BoostIt/WS/UnitDetail/{id}
+Add/Update/Delete unit	192.168.x.x:8080/BoostIt/WS/UnitDetail
+
+Like the POS-Book-Project
