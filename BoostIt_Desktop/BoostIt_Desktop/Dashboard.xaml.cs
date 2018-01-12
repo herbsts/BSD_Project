@@ -23,6 +23,7 @@ namespace BoostIt_Desktop
         {
             InitializeComponent();
             lblWelcome.Content = "Welcome " + username + "!";
+            lblLoggedIn.Content = username;
         }
     }
 }
