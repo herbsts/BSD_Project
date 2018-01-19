@@ -23,6 +23,19 @@ namespace BoostIt_Desktop
         {
             InitializeComponent();
             lblWelcome.Content = "Welcome " + username + "!";
+            lblLoggedIn.Content = username;
+        }
+
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
+        }
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
