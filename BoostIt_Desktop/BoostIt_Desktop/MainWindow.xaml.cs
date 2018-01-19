@@ -26,7 +26,7 @@ namespace BoostIt_Desktop
 
         private void OnBtnLoginClick(object sender, RoutedEventArgs e)
         {
-            if(txtUsername.Text.Length > 0 && txtUsername.Text.Length > 0)
+            /*if(txtUsername.Text.Length > 0 && txtUsername.Text.Length > 0)
             {
                 string retVal = Database.GetInstance().ChkLogin(txtUsername.Text, txtPassword.Password);
                 if(retVal != null)
@@ -44,7 +44,10 @@ namespace BoostIt_Desktop
             else
             {
                 MessageBox.Show("Enter a username and password to continue!");
-            }
+            }*/
+            Dashboard d = new Dashboard(txtUsername.Text);
+            d.Show();
+            this.Close();
         }
     }
 }
