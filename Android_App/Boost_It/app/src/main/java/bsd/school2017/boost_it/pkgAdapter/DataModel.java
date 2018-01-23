@@ -6,17 +6,33 @@ package bsd.school2017.boost_it.pkgAdapter;
 
 public class DataModel {
 
-    public int icon;
-    public String name;
+    String name;
+    String description;
+    String diff_number;
+    String feature;
 
-    // Constructor.
-    public DataModel(int icon, String name) {
+    public DataModel(String name, String description, String diff_number, String feature ) {
+        this.name=name;
+        this.description=description;
+        this.diff_number=diff_number;
+        this.feature=feature;
 
-        this.icon = icon;
-        this.name = name;
     }
 
-    public DataModel(String name){
-        this.name = name;
+    public String getName() {
+        return name;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDiff_number() {
+        return diff_number;
+    }
+
+    public String getFeature() {
+        return feature;
+    }
+
 }

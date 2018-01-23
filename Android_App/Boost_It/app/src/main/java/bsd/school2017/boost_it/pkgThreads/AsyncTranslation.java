@@ -3,6 +3,9 @@ package bsd.school2017.boost_it.pkgThreads;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -47,26 +50,21 @@ public class AsyncTranslation extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         String translation = null;
         try {
-            Log.e("test", result);
-            /*JSONObject js = new JSONObject(result);
-            JSONArray results = js.getJSONArray("results");
-            for(int i = 0;i<results.length();i++){
-                JSONObject lentries = results.getJSONObject(i);
-                JSONArray la = lentries.getJSONArray("lexicalEntries");
-                for(int j=0;j<la.length();j++){
-                    JSONObject entries = la.getJSONObject(j);
-                    JSONArray e = entries.getJSONArray("entries");
-                    for(int i1=0;i1<e.length();i1++){
-                        JSONObject senses = la.getJSONObject(i1);
-                        JSONArray s = entries.getJSONArray("senses");
-                        JSONObject d = s.getJSONObject(0);
-                        JSONArray de = d.getJSONArray("definitions");
-                        translation = de.getString(0);
-                    }
-                }
-            }*/
-            delegate.processFinish(result);
-            Log.e("def", result);
+            JSONObject obj = new JSONObject(result);
+            JSONArray resultsArr = obj.getJSONArray("results");
+            obj = resultsArr.getJSONObject(0);
+            JSONArray lexicalEntries = obj.getJSONArray("lexicalEntries");
+            obj = lexicalEntries.getJSONObject(0);
+            JSONArray entries = obj.getJSONArray("entries");
+            obj = entries.getJSONObject(0);
+            JSONArray senses = obj.getJSONArray("senses");
+            obj = senses.getJSONObject(0);
+            JSONArray translations = obj.getJSONArray("translations");
+            obj = translations.getJSONObject(0);
+            String finalTranslation = obj.get("text").toString();
+
+            delegate.processFinish(finalTranslation);
+            Log.e("def", finalTranslation);
 
         } catch (Exception e) {
             e.printStackTrace();
