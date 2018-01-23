@@ -9,14 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/background_main"
     tools:context="bsd.school2017.boost_it.pkgFragments.LoginFragment">
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="#fff">
-
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,6 +36,5 @@
             android:layout_below="@+id/edtPassword"
             android:text="Login" />
 
-    </RelativeLayout>
 
 </RelativeLayout>
