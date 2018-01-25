@@ -111,7 +111,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Background.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Logo_BoostIT.png" />
   </ItemGroup>

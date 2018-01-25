@@ -45,9 +45,6 @@ namespace BoostIt_Desktop
             {
                 MessageBox.Show("Enter a username and password to continue!");
             }
-            /*Dashboard d = new Dashboard(txtUsername.Text);
-            d.Show();
-            this.Close();*/
         }
     }
 }
