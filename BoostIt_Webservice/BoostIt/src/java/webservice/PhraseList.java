@@ -6,7 +6,7 @@
 package webservice;
 
 import com.DBManager;
-import data.User;
+import data.Phrase;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,26 +22,26 @@ import javax.ws.rs.core.MediaType;
  *
  * @author schueler
  */
-@Path("UserList")
-public class UserList {
+@Path("PhraseList")
+public class PhraseList {
 
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
 
-    public UserList() {
+    public PhraseList() {
     }
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ArrayList<User> getUsers() {
-        User u = null;
-        ArrayList<User> retList = new ArrayList();
+    public ArrayList<Phrase> getPhrases() {
+        Phrase u = null;
+        ArrayList<Phrase> retList = new ArrayList();
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery("select * from users");
+            rs = stmt.executeQuery("select * from phrases");
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
         }
@@ -49,7 +49,10 @@ public class UserList {
         if (rs != null) {
             try {
                 while (rs.next()) {
-                    u = new User(Integer.parseInt(rs.getObject(1).toString()), rs.getObject(2).toString(), rs.getObject(3).toString(), Integer.parseInt(rs.getObject(4).toString()));
+                    u = new Phrase(Integer.parseInt(rs.getObject(1).toString()), 
+                            rs.getObject(2).toString(), 
+                            rs.getObject(3).toString(), 
+                            new WordEnglish().getGermanWord(rs.getObject(4).toString()));
                     retList.add(u);
                 }
             } catch (SQLException e) {

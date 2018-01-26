@@ -6,15 +6,15 @@
 package webservice;
 
 import com.DBManager;
-import data.User;
+import data.Unit;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -28,26 +28,26 @@ import javax.ws.rs.core.MediaType;
  *
  * @author schueler
  */
-@Path("UserDetail")
-public class UserDetail {
+@Path("UnitDetail")
+public class UnitDetail {
 
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
 
-    public UserDetail() {
+    public UnitDetail() {
     }
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
-    @Path("{user_id}")
-    public User getUser(@PathParam("user_id") String user_id) {
-        User retUser = null;
+    @Path("{unit_id}")
+    public Unit getUnit(@PathParam("unit_id") String unit_id) {
+        Unit retUnit = null;
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery("select * from users where user_id = " + user_id);
+            rs = stmt.executeQuery("select * from units where unit_id = " + unit_id);
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
         }
@@ -55,9 +55,9 @@ public class UserDetail {
         if (rs != null) {
             try {
                 if (rs.next()) {
-                    retUser = new User(Integer.parseInt(rs.getObject(1).toString()),
-                            rs.getObject(2).toString(), rs.getObject(3).toString(),
-                            Integer.parseInt(rs.getObject(4).toString()));
+                    retUnit = new Unit(Integer.parseInt(rs.getObject(1).toString()), 
+                            rs.getObject(2).toString(), 
+                            new UserDetail().getUser(rs.getObject(3).toString()));
                 }
             } catch (SQLException e) {
                 System.err.println("Error at rs.next(): " + e.getMessage());
@@ -69,23 +69,22 @@ public class UserDetail {
         DBManager.close(con);
         System.out.println("==============webservice BoostIt GET called");
 
-        return retUser;
+        return retUnit;
     }
 
     @POST
     @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String addUser(User user) throws Exception {
+    public String addUnit(Unit unit) throws Exception {
         String retValue = "inserted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.executeUpdate("insert into users values (" + user.getUser_id() + ", '"
-                    + user.getUsername() + "', '" + user.getPassword() + "', "
-                    + user.getRole() + ")");
+            stmt.executeUpdate("insert into units values (" + unit.getUnit_id() 
+                    + ", '" + unit.getDescripiton() + "', '" + unit.getCreator().getUser_id() + ")");
             stmt.execute("commit");
         } catch (NumberFormatException e) {
-            System.err.println("user_id/role is not a number");
+            System.err.println("unit_id is not a number");
             retValue = e.getMessage();
         } catch (SQLException e) {
             System.err.println("Error at stmt: " + e.getMessage());
@@ -102,16 +101,15 @@ public class UserDetail {
 
     @PUT
     @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String updateUser(User user) throws IOException {
+    public String updateUnit(Unit unit) throws IOException {
         String retValue = "updated";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("update users set username = '" + user.getUsername()
-                    + "', password = '" + user.getPassword()
-                    + "', role = " + user.getRole() + " where user_id = " + user.getUser_id());
+            stmt.executeUpdate("update units set description = '" + unit.getDescripiton()
+                    + " where unit_id = " + unit.getUnit_id());
 
             stmt.execute("commit");
         } catch (SQLException e) {
@@ -129,14 +127,14 @@ public class UserDetail {
 
     @DELETE
     @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String deleteUser(@QueryParam("user_id") String user_id) throws IOException {
+    public String deleteUnit(@QueryParam("unit_id") String unit_id) throws IOException {
         String retValue = "deleted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("delete from users where id = " + user_id);
+            stmt.executeUpdate("delete from units where id = " + unit_id);
             stmt.execute("commit");
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
