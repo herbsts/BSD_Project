@@ -4,7 +4,8 @@ Get user by id		192.168.x.x:8080/BoostIt/WS/UserDetail/{id}
 Add/Update/Delete user	192.168.x.x:8080/BoostIt/WS/UserDetail
 
 WORDS:
-Get the word		192.168.x.x:8080/BoostIt/WS/WordDetail/{id}   //Geht noch nicht
+Get German translation of English word	192.168.x.x:8080/BoostIt/WS/WordEnglish/{english_word}
+Get English translation of German word	192.168.x.x:8080/BoostIt/WS/WordGerman/{german_word}
 
 UNITS:
 Get all units		192.168.x.x:8080/BoostIt/WS/UnitList
