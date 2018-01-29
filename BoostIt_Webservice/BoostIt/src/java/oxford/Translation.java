@@ -86,8 +86,9 @@ public class Translation {
                 result = senses.getJsonObject(0);
 
                 JsonArray regions = result.getJsonArray("regions");
-                if (regions != null)
+                if (regions != null) {
                     varietyOfEnglish = regions.toString();
+                }
 
                 JsonArray translations = result.getJsonArray("translations");
                 if (translations != null) {
@@ -143,9 +144,19 @@ public class Translation {
                 result = senses.getJsonObject(0);
 
                 JsonArray translations = result.getJsonArray("translations");
-                result = translations.getJsonObject(0);
+                if (translations != null) {
+                    result = translations.getJsonObject(0);
 
-                tEnglish = result.getString("text");
+                    tEnglish = result.getString("text");
+                } else {
+                    result = senses.getJsonObject(1);
+                    
+                    translations = result.getJsonArray("translations");
+                    
+                    result = translations.getJsonObject(0);
+
+                    tEnglish = result.getString("text");
+                }
 
                 word.settGerman(tGerman);
                 word.settEnglish(tEnglish);

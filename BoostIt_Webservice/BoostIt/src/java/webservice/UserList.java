@@ -33,7 +33,7 @@ public class UserList {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<User> getUsers() {
         User u = null;
         ArrayList<User> retList = new ArrayList();

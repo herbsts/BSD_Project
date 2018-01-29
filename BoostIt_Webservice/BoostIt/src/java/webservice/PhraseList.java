@@ -33,7 +33,7 @@ public class PhraseList {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Phrase> getPhrases() {
         Phrase u = null;
         ArrayList<Phrase> retList = new ArrayList();

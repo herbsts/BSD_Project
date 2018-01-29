@@ -33,7 +33,7 @@ public class UnitList {
     }
     
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Unit> getUnits() {
         Unit u = null;
         ArrayList<Unit> retList = new ArrayList();

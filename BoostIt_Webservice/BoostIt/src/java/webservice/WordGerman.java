@@ -25,7 +25,7 @@ public class WordGerman {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("{german_word}")
     public Word getEnglishWord(@PathParam("german_word") String german_word) {
         Word retWord = new Word();

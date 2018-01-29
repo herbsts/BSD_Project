@@ -39,7 +39,7 @@ public class UserDetail {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("{user_id}")
     public User getUser(@PathParam("user_id") String user_id) {
         User retUser = null;

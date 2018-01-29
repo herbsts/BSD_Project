@@ -39,7 +39,7 @@ public class UnitDetail {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("{unit_id}")
     public Unit getUnit(@PathParam("unit_id") String unit_id) {
         Unit retUnit = null;
