@@ -59,6 +59,9 @@
     <Compile Include="CreateUser.xaml.cs">
       <DependentUpon>CreateUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShowUser.xaml.cs">
+      <DependentUpon>ShowUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Page Include="CreateUser.xaml">
       <SubType>Designer</SubType>
@@ -77,6 +80,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShowUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

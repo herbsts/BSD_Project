@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BoostIt_Desktop"
         mc:Ignorable="d"
+        Icon="pack://application:,,,../Resources/Logo_BoostIT.png"
         Title="Login - BoostL" Height="720" Width="1280" Background="#006747"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid Margin="0,0,-0.4,0.4">

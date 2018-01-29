@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace BoostIt_Desktop
 {
     /// <summary>
-    /// Interaction logic for Dashboard.xaml
+    /// Interaction logic for ShowUser.xaml
     /// </summary>
-    public partial class Dashboard : Window
+    public partial class ShowUser : Window
     {
-        public Dashboard(string username)
+        public ShowUser(string username)
         {
             InitializeComponent();
             lblLoggedIn.Content = username;
@@ -43,7 +43,11 @@ namespace BoostIt_Desktop
         }
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
-        {/*Not necessary here because we are already in Dashboard Window here...*/}
+        {
+            Dashboard db = new Dashboard(lblLoggedIn.Content.ToString());
+            db.Show();
+            this.Close();
+        }
 
         private void BtnCreateUser_Click(object sender, RoutedEventArgs e)
         {
@@ -53,11 +57,7 @@ namespace BoostIt_Desktop
         }
 
         private void BtnShowUser_Click(object sender, RoutedEventArgs e)
-        {
-            ShowUser su = new ShowUser(lblLoggedIn.Content.ToString());
-            su.Show();
-            this.Close();
-        }
+        {/*Not necessary here because we are already in Dashboard Window here...*/}
 
         private void BtnEditUser_Click(object sender, RoutedEventArgs e)
         {

@@ -22,6 +22,12 @@ namespace BoostIt_Desktop
         public CreateUser(string username)
         {
             InitializeComponent();
+            lblLoggedIn.Content = username;
+        }
+
+        public CreateUser()
+        {
+            InitializeComponent();
         }
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
@@ -49,7 +55,7 @@ namespace BoostIt_Desktop
         }
 
         private void BtnCreateUser_Click(object sender, RoutedEventArgs e)
-        {/*Not necessary here because we are already in Dashboard Window here...*/}
+        {/*Not necessary here because we are already in CreateUser Window here...*/}
 
         private void BtnShowUser_Click(object sender, RoutedEventArgs e)
         {

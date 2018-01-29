@@ -5,15 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BoostIt_Desktop"
         mc:Ignorable="d"
+        Icon="pack://application:,,,../Resources/Logo_BoostIT.png"
         Title="Create User - BoostL" Height="810" Width="1440"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
-    <Grid Background="#006747">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,../Resources/Background.jpg"/>
+        </Grid.Background>
         <ScrollViewer Width="150" HorizontalAlignment="Left" VerticalScrollBarVisibility="Auto">
             <StackPanel Width="150" Background="SeaGreen" HorizontalAlignment="Left">
                 <Label Margin="0,10,0,0" FontSize="20" FontWeight="Bold" HorizontalContentAlignment="Center">MENU</Label>
                 <Path Margin="0,5,0,0" Width="38" Height="38" Canvas.Left="19" Canvas.Top="19" Stretch="Fill" Fill="#FF000000" Data="F1 M 38,19C 43.5417,19 45.9167,22.1667 45.1174,28.8134C 45.8315,29.2229 46.3125,29.9928 46.3125,30.875C 46.3125,31.9545 45.5923,32.8658 44.6061,33.1546C 44.1941,34.623 43.5543,35.9229 42.75,36.9628L 42.75,41.9583C 45.3889,42.4861 47.5,42.75 50.6667,44.3333C 53.8333,45.9167 54.8889,47.3681 57,49.4792L 57,57L 19,57L 19,49.4792C 21.1111,47.3681 22.1667,45.9167 25.3333,44.3333C 28.5,42.75 30.6111,42.4861 33.25,41.9583L 33.25,36.9628C 32.4457,35.9229 31.8059,34.623 31.3939,33.1546C 30.4077,32.8658 29.6875,31.9545 29.6875,30.875C 29.6875,29.9928 30.1685,29.2229 30.8826,28.8134C 30.0833,22.1667 32.4583,19 38,19 Z "/>
                 <Label Margin="0,-5,0,0" Width="auto" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold">User</Label>
-                <Button x:Name="btnCreateUser" Background="LightGreen" Width="125" FontSize="14" FontWeight="Bold" Click="BtnCreateUser_Click">Create</Button>
+                <Button x:Name="btnCreateUser" Foreground="White" Margin="0,0,0,1" FontSize="18" FontWeight="Bold" Click="BtnCreateUser_Click">Create
+                    <Button.Background>
+                        <ImageBrush ImageSource="pack://application:,,,../Resources/Background.jpg"/>
+                    </Button.Background>
+                </Button>
                 <Button x:Name="btnShowUser" Background="LightGreen" Width="125" FontSize="14" FontWeight="Bold" Click="BtnShowUser_Click">Show</Button>
                 <Button x:Name="btnEditUser" Background="LightGreen" Width="125" FontWeight="Bold" FontSize="14" Click="BtnEditUser_Click">Edit</Button>
 
@@ -38,17 +46,19 @@
                 <Label Margin="0,10,0,0" FontSize="12" FontWeight="Bold" HorizontalContentAlignment="Center">Logged in as</Label>
                 <Label x:Name="lblLoggedIn" Margin="0,-5,0,0" FontSize="16" FontWeight="Bold" HorizontalContentAlignment="Center"></Label>
 
-                <Button Padding="5,5,5,5" Margin="50,20,50,0" x:Name="btnGoHome" Background="Transparent" BorderThickness="0" Click="BtnHome_Click">
-                    <Path Margin="0,0,0,0" Width="38.0053" Height="36.005" Canvas.Left="19.0026" Canvas.Top="20.0028" Stretch="Fill" Fill="#FF000000" Data="F1 M 49.0068,36.005L 38.0053,26.9205L 27.0038,36.005L 27.0038,44.0062L 24.0032,44.0062L 24.0033,38.0053L 22.0031,40.0056L 19.0026,35.0049L 38.0053,20.0028L 45.0063,25.5299L 45.0063,21.753L 49.0068,21.003L 49.0068,28.6882L 57.0079,35.0049L 54.0075,40.0056L 52.0072,38.0053L 52.0072,56.0078L 24.0033,56.0078L 24.0032,50.007L 27.0038,50.007L 27.0038,53.0074L 38.0045,53.0075L 38.0045,41.0061L 46.0058,41.0061L 46.0058,53.0075L 49.0068,53.0074L 49.0068,36.005 Z M 31.004,45.0064L 31.004,42.0059L 36.0049,47.0066L 31.004,52.0073L 31.004,49.007L 24.0037,49.007L 24.0037,45.0064L 31.004,45.0064 Z "/>
-                </Button>
-                <Label Margin="0,-5,0,0" Width="auto" FontSize="18" FontWeight="Bold" HorizontalContentAlignment="Center">Home</Label>
+                <Path Margin="0,20,0,0" Width="38.0053" Height="36.005" Canvas.Left="19.0026" Canvas.Top="20.0028" Stretch="Fill" Fill="#FF000000" Data="F1 M 49.0068,36.005L 38.0053,26.9205L 27.0038,36.005L 27.0038,44.0062L 24.0032,44.0062L 24.0033,38.0053L 22.0031,40.0056L 19.0026,35.0049L 38.0053,20.0028L 45.0063,25.5299L 45.0063,21.753L 49.0068,21.003L 49.0068,28.6882L 57.0079,35.0049L 54.0075,40.0056L 52.0072,38.0053L 52.0072,56.0078L 24.0033,56.0078L 24.0032,50.007L 27.0038,50.007L 27.0038,53.0074L 38.0045,53.0075L 38.0045,41.0061L 46.0058,41.0061L 46.0058,53.0075L 49.0068,53.0074L 49.0068,36.005 Z M 31.004,45.0064L 31.004,42.0059L 36.0049,47.0066L 31.004,52.0073L 31.004,49.007L 24.0037,49.007L 24.0037,45.0064L 31.004,45.0064 Z "/>
+                <Button Margin="13,10,13,0" Background="LightGreen" Click="BtnHome_Click" FontSize="18" FontWeight="Bold" HorizontalContentAlignment="Center">Home</Button>
             </StackPanel>
         </ScrollViewer>
-        <Image Height="145" Margin="611.8,25,461.8,0" VerticalAlignment="Top" Source="pack://application:,,,../Resources/Logo_BoostIT.png"/>
-        <Label x:Name="lblUsername" Content="Username: " HorizontalAlignment="Left" Margin="502,292,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <Label x:Name="lblPassword" Content="Password: " HorizontalAlignment="Left" Margin="502,372,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <Label x:Name="lblRepeatPassword" Content="Repeat Password: " HorizontalAlignment="Left" Margin="502,423,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <Button x:Name="btnAddUser" Content="Add User" HorizontalAlignment="Left" Margin="612,482,0,0" VerticalAlignment="Top" Width="112" FontSize="18" FontWeight="Bold"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="794,501,0,0" VerticalAlignment="Top" Width="86" FontSize="18" FontWeight="Bold"/>
+        <Path  Margin="155,25,10,0" Stretch="Uniform" Canvas.Left="19" Canvas.Top="19" Fill="#FF000000" Data="F1 M 26.9167,38L 31.6667,38L 31.6667,45.9167L 39.5833,45.9167L 39.5833,50.6667L 31.6667,50.6667L 31.6667,58.5833L 26.9167,58.5833L 26.9167,50.6667L 19,50.6667L 19,45.9167L 26.9167,45.9167L 26.9167,38 Z M 38,19C 43.5417,19 45.9167,22.1667 45.1174,28.8134C 45.8315,29.2229 46.3125,29.9928 46.3125,30.875C 46.3125,31.9545 45.5923,32.8658 44.6061,33.1546C 44.1941,34.623 43.5543,35.9229 42.75,36.9628L 42.75,41.9583C 45.3889,42.4861 47.5,42.75 50.6667,44.3333C 53.8333,45.9167 54.8889,47.3681 57,49.4792L 57,57L 33.25,57L 33.25,52.25L 41.1667,52.25L 41.1666,44.3333L 33.25,44.3333L 33.25,36.9628L 33.25,36.4167L 32.8586,36.4167C 32.237,35.4811 31.7366,34.3762 31.3939,33.1546C 30.4077,32.8658 29.6875,31.9545 29.6875,30.875C 29.6875,29.9928 30.1685,29.2229 30.8826,28.8134C 30.0833,22.1667 32.4583,19 38,19 Z M 19,57L 19,52.25L 25.3333,52.25L 25.3333,57L 19,57 Z " Height="150" VerticalAlignment="Top"/>
+        <Label x:Name="lblUsername" Content="Username: " HorizontalAlignment="Left" Margin="555,270,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <Label x:Name="lblPassword" Content="Password: " HorizontalAlignment="Left" Margin="555,329,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <Label x:Name="lblRepeatPassword" Content="Repeat Password: " HorizontalAlignment="Left" Margin="555,388,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <Button x:Name="btnAddUser" Background="LightGray" Content="Add User" Margin="723,447,598.6,0" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Top"/>
+        <Button x:Name="btnCancel" Background="LightGray" Content="Cancel" Margin="938,447,409.6,0" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Top"/>
+        <Label x:Name="lblInstruction" Background="SeaGreen" Foreground="White" Content="Enter a Username and Password to continue: " Margin="455,200,309.6,0" FontSize="26" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtName" Background="LightGreen" Margin="723,270,409.6,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
+        <TextBox x:Name="txtName_Copy" Background="LightGreen" Margin="723,329,409.6,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
+        <TextBox x:Name="txtName_Copy1" Background="LightGreen" Margin="723,388,409.6,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
     </Grid>
 </Window>
