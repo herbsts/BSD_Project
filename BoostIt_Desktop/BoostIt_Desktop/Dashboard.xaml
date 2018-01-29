@@ -59,7 +59,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnShowMessage" Content="Open Messge Details" Margin="1084,0,159.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom"/>
-        <Button x:Name="btnShowHistory" Content="Show Message History" Margin="305,0,928.6,25" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="18"/>
+        <Button x:Name="btnShowMessage" Content="Open Messge Details" Margin="1084,0,159.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom" Click="BtnShowMessage_Click"/>
+        <Button x:Name="btnShowHistory" Content="Show Message History" Margin="305,0,928.6,25" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="18" Click="BtnShowHistory_Click"/>
     </Grid>
 </Window>

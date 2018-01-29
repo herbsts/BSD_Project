@@ -73,12 +73,16 @@ namespace BoostIt_Desktop
 
         private void BtnCreateGroup_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateGroup cg = new CreateGroup(lblLoggedIn.Content.ToString());
+            cg.Show();
+            this.Close();
         }
 
         private void BtnShowGroup_Click(object sender, RoutedEventArgs e)
         {
-
+            ShowGroup sg = new ShowGroup(lblLoggedIn.Content.ToString());
+            sg.Show();
+            this.Close();
         }
 
         private void BtnEditGroup_Click(object sender, RoutedEventArgs e)
