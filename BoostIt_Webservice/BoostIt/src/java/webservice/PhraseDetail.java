@@ -6,7 +6,7 @@
 package webservice;
 
 import com.DBManager;
-import data.User;
+import data.Phrase;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,26 +28,26 @@ import javax.ws.rs.core.MediaType;
  *
  * @author schueler
  */
-@Path("UserDetail")
-public class UserDetail {
+@Path("PhraseDetail")
+public class PhraseDetail {
 
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
 
-    public UserDetail() {
+    public PhraseDetail() {
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{user_id}")
-    public User getUser(@PathParam("user_id") String user_id) {
-        User retUser = null;
+    @Path("{phrase_id}")
+    public Phrase getPhrase(@PathParam("phrase_id") String phrase_id) {
+        Phrase retPhrase = null;
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery("select * from users where user_id = " + user_id);
+            rs = stmt.executeQuery("select * from phrases where phrase_id = " + phrase_id);
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
         }
@@ -55,9 +55,9 @@ public class UserDetail {
         if (rs != null) {
             try {
                 if (rs.next()) {
-                    retUser = new User(Integer.parseInt(rs.getObject(1).toString()),
+                    retPhrase = new Phrase(Integer.parseInt(rs.getObject(1).toString()),
                             rs.getObject(2).toString(), rs.getObject(3).toString(),
-                            Integer.parseInt(rs.getObject(4).toString()));
+                            new WordEnglish().getGermanWord("temporary"));
                 }
             } catch (SQLException e) {
                 System.err.println("Error at rs.next(): " + e.getMessage());
@@ -69,23 +69,23 @@ public class UserDetail {
         DBManager.close(con);
         System.out.println("==============webservice BoostIt GET called");
 
-        return retUser;
+        return retPhrase;
     }
 
     @POST
     @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String addUser(User user) throws Exception {
+    public String addPhrase(Phrase phrase) throws Exception {
         String retValue = "inserted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.executeUpdate("insert into users values (" + user.getUser_id() + ", '"
-                    + user.getUsername() + "', '" + user.getPassword() + "', "
-                    + user.getRole() + ")");
+            stmt.executeUpdate("insert into phrases values (" + phrase.getPhrase_id() + ", '"
+                    + phrase.gettGerman() + "', '" + phrase.gettEnglish() + "', "
+                    + phrase.getWord().getWord_id() + ")");
             stmt.execute("commit");
         } catch (NumberFormatException e) {
-            System.err.println("user_id/role is not a number");
+            System.err.println("phrase_id/word_id is not a number");
             retValue = e.getMessage();
         } catch (SQLException e) {
             System.err.println("Error at stmt: " + e.getMessage());
@@ -102,16 +102,16 @@ public class UserDetail {
 
     @PUT
     @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String updateUser(User user) throws IOException {
+    public String updatePhrase(Phrase phrase) throws IOException {
         String retValue = "updated";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("update users set username = '" + user.getUsername()
-                    + "', password = '" + user.getPassword()
-                    + "', role = " + user.getRole() + " where user_id = " + user.getUser_id());
+            stmt.executeUpdate("update phrases set tGerman = '" + phrase.gettGerman()
+                    + "', tEnglish = '" + phrase.gettEnglish()
+                    + "', word_id = " + phrase.getWord().getWord_id() + " where phrase_id = " + phrase.getPhrase_id());
 
             stmt.execute("commit");
         } catch (SQLException e) {
@@ -129,14 +129,14 @@ public class UserDetail {
 
     @DELETE
     @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String deleteUser(@QueryParam("user_id") String user_id) throws IOException {
+    public String deletePhrase(@QueryParam("phrase_id") String phrase_id) throws IOException {
         String retValue = "deleted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("delete from users where user_id = " + user_id);
+            stmt.executeUpdate("delete from phrases where phrase_id = " + phrase_id);
             stmt.execute("commit");
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());

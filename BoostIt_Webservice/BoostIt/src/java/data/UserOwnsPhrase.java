@@ -21,7 +21,7 @@ public class UserOwnsPhrase {
     private float accuracy;
 
     public UserOwnsPhrase() {
-        this(-99, new Phrase(), new User(), new Date(99), -99);
+        this(-99, new Phrase(), new User(), Date.valueOf("1999-09-19"), -99);
     }
     
     public UserOwnsPhrase(int id, Phrase phrase, User user, Date lastTimeRevised, float accuracy) {

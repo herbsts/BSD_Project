@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -33,15 +34,16 @@ public class UnitList {
     }
     
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public ArrayList<Unit> getUnits() {
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{creator_id}")
+    public ArrayList<Unit> getUnits(@PathParam("creator_id") String creator_id) {
         Unit u = null;
         ArrayList<Unit> retList = new ArrayList();
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery("select * from units");
+            rs = stmt.executeQuery("select * from units where creator = " + creator_id);
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
         }

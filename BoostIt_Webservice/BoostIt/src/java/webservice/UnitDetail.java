@@ -39,7 +39,7 @@ public class UnitDetail {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("{unit_id}")
     public Unit getUnit(@PathParam("unit_id") String unit_id) {
         Unit retUnit = null;
@@ -134,7 +134,7 @@ public class UnitDetail {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("delete from units where id = " + unit_id);
+            stmt.executeUpdate("delete from units where unit_id = " + unit_id);
             stmt.execute("commit");
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());

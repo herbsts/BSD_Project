@@ -21,7 +21,7 @@ public class UserOwnsWord {
     private float accuracy;
 
     public UserOwnsWord() {
-        this(-99, new User(), new Word(), new Date(99), -99);
+        this(-99, new User(), new Word(), Date.valueOf("1999-09-19"), -99);
     }
     
     public UserOwnsWord(int id, User user, Word word, Date lastTimeRevised, float accuracy) {
