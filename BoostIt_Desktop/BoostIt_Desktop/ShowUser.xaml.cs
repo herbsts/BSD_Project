@@ -61,7 +61,9 @@ namespace BoostIt_Desktop
 
         private void BtnEditUser_Click(object sender, RoutedEventArgs e)
         {
-
+            EditUser eu = new EditUser(lblLoggedIn.Content.ToString());
+            eu.Show();
+            this.Close();
         }
 
         private void BtnCreateGroup_Click(object sender, RoutedEventArgs e)
