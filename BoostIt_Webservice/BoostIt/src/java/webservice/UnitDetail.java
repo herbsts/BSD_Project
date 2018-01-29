@@ -134,7 +134,7 @@ public class UnitDetail {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("delete from units where id = " + unit_id);
+            stmt.executeUpdate("delete from units where unit_id = " + unit_id);
             stmt.execute("commit");
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());

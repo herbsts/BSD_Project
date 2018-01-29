@@ -22,7 +22,7 @@ public class Request {
     private User user;
     
     public Request() {
-        this(-99, "no concern", new Date(99), new Date(99), "no status", new User());
+        this(-99, "no concern", Date.valueOf("1999-09-19"), Date.valueOf("1999-09-19"), "no status", new User());
     }
 
     public Request(int request_id, String concern, Date requestDate, Date editDate, String status, User user) {

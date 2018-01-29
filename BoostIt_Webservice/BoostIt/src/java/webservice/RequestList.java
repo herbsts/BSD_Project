@@ -6,7 +6,7 @@
 package webservice;
 
 import com.DBManager;
-import data.Phrase;
+import data.Request;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,27 +23,27 @@ import javax.ws.rs.core.MediaType;
  *
  * @author schueler
  */
-@Path("PhraseList")
-public class PhraseList {
+@Path("RequestList")
+public class RequestList {
 
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
 
-    public PhraseList() {
+    public RequestList() {
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{english_word}")
-    public ArrayList<Phrase> getPhrases(@PathParam("english_word") String english_word) {
-        Phrase p = null;
-        ArrayList<Phrase> retList = new ArrayList();
+    @Path("{user_id}")
+    public ArrayList<Request> getRequests(@PathParam("user_id") String user_id) {
+        Request p = null;
+        ArrayList<Request> retList = new ArrayList();
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery("select * from phrases where word_id = " + english_word);
+            rs = stmt.executeQuery("select * from requests where user_id = " + user_id);
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
         }
@@ -51,10 +51,8 @@ public class PhraseList {
         if (rs != null) {
             try {
                 while (rs.next()) {
-                    p = new Phrase(Integer.parseInt(rs.getObject(1).toString()), 
-                            rs.getObject(2).toString(), 
-                            rs.getObject(3).toString(), 
-                            new WordEnglish().getGermanWord(english_word));
+                    p = new Request(rs.getInt(1), rs.getString(2), rs.getDate(3),
+                            rs.getDate(4), rs.getString(5), new UserDetail().getUser(user_id));
                     retList.add(p);
                 }
             } catch (SQLException e) {
