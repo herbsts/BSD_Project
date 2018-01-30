@@ -53,14 +53,14 @@
         <Path Stretch="Uniform" Canvas.Left="21.0463" Canvas.Top="19.9749" Fill="#FF000000" Data="F1 M 53.2929,21.2929L 54.7071,22.7071C 56.4645,24.4645 56.4645,27.3137 54.7071,29.0711L 52.2323,31.5459L 44.4541,23.7677L 46.9289,21.2929C 48.6863,19.5355 51.5355,19.5355 53.2929,21.2929 Z M 31.7262,52.052L 23.948,44.2738L 43.0399,25.182L 50.818,32.9601L 31.7262,52.052 Z M 23.2409,47.1023L 28.8977,52.7591L 21.0463,54.9537L 23.2409,47.1023 Z " Margin="812.11,58.6,568.51,0" Height="54.18" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.702"/>
         <Label x:Name="lblInstruction" Background="SeaGreen" Foreground="White" Content="Select a User to continue: " Margin="405,200,260,0" FontSize="26" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
         <Label x:Name="lblUser" Content="User: " Margin="555,270,773.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <ComboBox Margin="665,270,505.6,0" VerticalAlignment="Top" Height="34" FontSize="18" FontWeight="Bold"/>
+        <ComboBox x:Name="cbUsers" SelectionChanged="CbUsers_SelectionChanged" Margin="665,270,505.6,0" VerticalAlignment="Top" Height="34" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblUsername" Content="Username: " Margin="555,354,774.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblPassword" Content="Password: " Margin="555,413,779.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <Label x:Name="txtName" Background="LightGreen" Margin="665,354,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
-        <Label x:Name="txtPassword" Background="LightGreen" Margin="665,413,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
+        <TextBox x:Name="txtName" Background="LightGreen" Margin="665,354,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
+        <PasswordBox x:Name="txtPassword" Background="LightGreen" Margin="665,413,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
         <Label x:Name="lblRole" Content="Role: " Margin="555,472,779.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <ComboBox x:Name="cbRole" Margin="665,472,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
-        <Button x:Name="btnSaveChanges" Background="White" Content="Save Changes" Margin="665,531,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="130" />
-        <Button x:Name="btnCancel" Background="White" Content="Cancel" Margin="0,531,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Width="75"/>
+        <Button x:Name="btnSaveChanges" Background="White" Content="Save Changes" Margin="665,531,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="130" Click="BtnSaveChanges_Click" />
+        <Button x:Name="btnCancel" Background="White" Content="Cancel" Margin="0,531,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Width="75" Click="BtnCancel_Click"/>
     </Grid>
 </Window>

@@ -22,8 +22,8 @@ namespace BoostIt_Desktop
         public MainWindow()
         {
             InitializeComponent();
-            txtUsername.Text = "Herbot";
-            txtPassword.Password = "herbot";
+            //txtUsername.Text = "Herbot";
+            //txtPassword.Password = "herbot";
         }
 
         private void OnBtnLoginClick(object sender, RoutedEventArgs e)

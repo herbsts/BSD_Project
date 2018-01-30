@@ -28,7 +28,7 @@ namespace BoostIt_Desktop
 
         public override string ToString()
         {
-            return "{User: " + Id + ", " + Username + ", " + Password + ", " + Role + "} ";
+            return "{User: Id=" + Id + ", Username=" + Username + ", Password=" + Password + ", Role=" + Role + "} ";
         }
     }
 }

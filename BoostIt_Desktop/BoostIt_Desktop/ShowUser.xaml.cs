@@ -23,6 +23,7 @@ namespace BoostIt_Desktop
         {
             InitializeComponent();
             lblLoggedIn.Content = username;
+            listUsers.ItemsSource = Database.GetInstance().GetUsers();
         }
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
@@ -97,6 +98,21 @@ namespace BoostIt_Desktop
         private void BtnShowGroupStatistic_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnDeleteSelectedUser_Click(object sender, RoutedEventArgs e)
+        {
+            if(listUsers.SelectedItem == null)
+            {
+                MessageBox.Show("Select a user first!");
+            }
+            else
+            {
+                Database.GetInstance().RemoveUser((User)listUsers.SelectedItem);
+                listUsers.ItemsSource = null;
+                listUsers.ItemsSource = Database.GetInstance().GetUsers();
+                MessageBox.Show("User deleted successfully.");
+            }
         }
     }
 }

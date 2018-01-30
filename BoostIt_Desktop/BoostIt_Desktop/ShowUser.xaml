@@ -54,7 +54,7 @@
         <Label x:Name="lblInstruction" Background="SeaGreen" Foreground="White" Content="Enter a Username or select a User to continue: " Margin="305,200,159.6,0" FontSize="26" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
         <Label x:Name="lblUsername" Content="Username: " Margin="505,270,828.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <TextBox x:Name="txtName" Background="LightGreen" Margin="630,273,523.6,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
-        <ListView Margin="305,329,159.6,78">
+        <ListView x:Name="listUsers" Margin="305,329,159.6,78">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -63,7 +63,7 @@
         </ListView>
         <Button x:Name="btnSearch" Background="White" Content="Search for User" Margin="0,273,349.6,0" FontSize="18" FontWeight="Bold" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="149"/>
         <Button x:Name="btnShowUserDetails" Content="Show Details for selected User" Margin="999,0,159.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom"/>
-        <Button x:Name="btnDeleteSelectedUser" Content="Delete selected User" Margin="305,0,943.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom"/>
+        <Button x:Name="btnDeleteSelectedUser" Content="Delete selected User" Margin="305,0,943.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom" Click="BtnDeleteSelectedUser_Click"/>
 
     </Grid>
 </Window>

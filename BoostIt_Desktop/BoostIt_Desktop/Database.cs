@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace BoostIt_Desktop
 {
@@ -15,7 +16,7 @@ namespace BoostIt_Desktop
     {
         private string cs = ConfigurationManager.ConnectionStrings["OracleDatabase"].ConnectionString;
         private static Database instance;
-        private User u;
+        private List<User> users = new List<User>();
         public Database() { }
         public static Database GetInstance()
         {
@@ -24,6 +25,29 @@ namespace BoostIt_Desktop
                 instance = new Database();
             }
             return instance;
+        }
+
+        public IEnumerable LoadUsers()
+        {
+            WebRequest request = WebRequest.Create("http://192.168.194.206:8080/BoostIt/WS/UserList");
+            Console.WriteLine(request.GetResponse().GetResponseStream());
+            request.Method = "GET";
+            WebResponse response = request.GetResponse();
+            users.Clear();
+            using (var webserviceResponse = (WebResponse)request.GetResponse())
+            {
+                using (var reader = new StreamReader(webserviceResponse.GetResponseStream()))
+                {
+                    string json = reader.ReadToEnd();
+                    users = JsonConvert.DeserializeObject<List<User>>(json);
+                }
+            }
+            return users;
+        }
+
+        public IEnumerable GetUsers()
+        {
+            return users;
         }
 
         public bool ChkLogin(string username, string password)
@@ -44,7 +68,7 @@ namespace BoostIt_Desktop
 
             return retVal;*/
 
-            WebRequest request = WebRequest.Create("http://192.168.1.8:8080/BoostIt/WS/UserList");
+            WebRequest request = WebRequest.Create("http://192.168.194.206:8080/BoostIt/WS/UserList");
             Console.WriteLine(request.GetResponse().GetResponseStream());
             request.Method = "GET";
             WebResponse response = request.GetResponse();
@@ -71,11 +95,16 @@ namespace BoostIt_Desktop
             //u = new User(username, password);
         }
 
-        public string InsertUser(User usrToInsert)
+        public void RemoveUser(User selectedItem)
         {
-            string json = JsonConvert.SerializeObject(usrToInsert, Formatting.Indented);
+            users.Remove(selectedItem);
+        }
 
-            var request = WebRequest.Create("http://192.168.1.8:8080/BoostIt/WS/UserDetail");
+        public void InsertUser(User usrToInsert)
+        {
+            /*string json = JsonConvert.SerializeObject(usrToInsert, Formatting.Indented);
+
+            var request = WebRequest.Create("http://192.168.194.206:8080/BoostIt/WS/UserDetail");
 
             var data = Encoding.ASCII.GetBytes(json);
 
@@ -91,7 +120,8 @@ namespace BoostIt_Desktop
             var response = (WebResponse)request.GetResponse();
 
             string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            return responseString;
+            return responseString;*/
+            users.Add(usrToInsert);
         }
     }
 }

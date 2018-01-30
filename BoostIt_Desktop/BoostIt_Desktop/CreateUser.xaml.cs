@@ -131,7 +131,8 @@ namespace BoostIt_Desktop
                     role = -1;
 
                 User usrToInsert = new User(-1, txtName.Text, txtPassword.Password, role);
-                string response = Database.GetInstance().InsertUser(usrToInsert);
+                Database.GetInstance().InsertUser(usrToInsert);
+                MessageBox.Show("User inserted successfully.");
             }
         }
 

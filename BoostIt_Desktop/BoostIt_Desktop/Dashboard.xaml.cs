@@ -23,6 +23,7 @@ namespace BoostIt_Desktop
         {
             InitializeComponent();
             lblLoggedIn.Content = username;
+            Database.GetInstance().LoadUsers();
         }
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
