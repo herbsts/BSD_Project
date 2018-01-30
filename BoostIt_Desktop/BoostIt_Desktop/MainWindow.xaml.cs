@@ -30,8 +30,8 @@ namespace BoostIt_Desktop
         {
             if(txtUsername.Text.Length > 0 && txtUsername.Text.Length > 0)
             {
-                /*string retVal = Database.GetInstance().ChkLogin(txtUsername.Text, txtPassword.Password);
-                if(retVal != null)
+                bool retVal = Database.GetInstance().ChkLogin(txtUsername.Text, txtPassword.Password);
+                if(retVal)
                 {
                     Database.GetInstance().SetUser(txtUsername.Text, txtPassword.Password);
                     Dashboard d = new Dashboard(txtUsername.Text);
@@ -41,10 +41,10 @@ namespace BoostIt_Desktop
                 else
                 {
                     MessageBox.Show("Error: No user '" + txtUsername.Text + "' found!");
-                }*/
-                Dashboard d = new Dashboard("Herbot");
+                }
+                /*Dashboard d = new Dashboard("Herbot");
                 d.Show();
-                this.Close();
+                this.Close();*/
             }
             else
             {

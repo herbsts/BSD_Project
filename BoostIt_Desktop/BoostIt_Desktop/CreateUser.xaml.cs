@@ -23,6 +23,12 @@ namespace BoostIt_Desktop
         {
             InitializeComponent();
             lblLoggedIn.Content = username;
+            var dataSource = new List<string>
+            {
+                "Student",
+                "Teacher"
+            };
+            cbRole.ItemsSource = dataSource;
         }
 
         public CreateUser()
@@ -102,6 +108,39 @@ namespace BoostIt_Desktop
         private void BtnShowGroupStatistic_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            if(txtName.Text.Length <= 0 || txtPassword.Password.Length <= 0 || txtPasswordRepeat.Password.Length <= 0 || cbRole.SelectedItem == null)
+            {
+                MessageBox.Show("Please enter a Username, Password, repeat your Password and select a role!");
+            }
+            else if (!txtPassword.Password.Equals(txtPasswordRepeat.Password))
+            {
+                MessageBox.Show("You entered two different passwords, please try again!");
+            }
+            else
+            {
+                int role;
+                if (cbRole.SelectedItem.ToString().Equals("Student"))
+                    role = 0;
+                else if (cbRole.SelectedItem.ToString().Equals("Teacher"))
+                    role = 1;
+                else
+                    role = -1;
+
+                User usrToInsert = new User(-1, txtName.Text, txtPassword.Password, role);
+                string response = Database.GetInstance().InsertUser(usrToInsert);
+            }
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            txtName.Text = "";
+            txtPassword.Password = "";
+            txtPasswordRepeat.Password = "";
+            cbRole.SelectedItem = null;
         }
     }
 }

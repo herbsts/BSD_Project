@@ -54,12 +54,12 @@
         <Label x:Name="lblUsername" Content="Username: " Margin="555,270,774.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblPassword" Content="Password: " Margin="555,329,779.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblRepeatPassword" Content="Repeat Password: " Margin="555,388,715.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <Button x:Name="btnAddUser" Background="White" Content="Add User" Margin="723,506,598.6,0" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Top"/>
-        <Button x:Name="btnCancel" Background="White" Content="Cancel" Margin="938,506,409.6,0" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Top"/>
+        <Button x:Name="btnAddUser" Background="White" Content="Add User" Margin="723,506,598.6,0" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Top" Click="BtnAddUser_Click"/>
+        <Button x:Name="btnCancel" Background="White" Content="Cancel" Margin="938,506,409.6,0" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Top" Click="BtnCancel_Click"/>
         <Label x:Name="lblInstruction" Background="SeaGreen" Foreground="White" Content="Enter Username, Password and select a role to continue: " Margin="405,200,260,0" FontSize="26" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="txtName" Background="LightGreen" Margin="723,270,409.6,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
-        <TextBox x:Name="txtName_Copy" Background="LightGreen" Margin="723,329,409.6,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
-        <TextBox x:Name="txtName_Copy1" Background="LightGreen" Margin="723,388,409.6,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
+        <PasswordBox x:Name="txtPassword" Background="LightGreen" Margin="723,329,409.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
+        <PasswordBox x:Name="txtPasswordRepeat" Background="LightGreen" Margin="723,388,409.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
         <Label x:Name="lblRole" Content="Role: " Margin="555,447,715.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <ComboBox x:Name="cbRole" Margin="723,447,409.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
     </Grid>
