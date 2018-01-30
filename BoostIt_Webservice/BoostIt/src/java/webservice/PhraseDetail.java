@@ -73,23 +73,23 @@ public class PhraseDetail {
     }
 
     @POST
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String addPhrase(Phrase phrase) throws Exception {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String addPhrase(Phrase phrase) {
         String retValue = "inserted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.executeUpdate("insert into phrases values (" + phrase.getPhrase_id() + ", '"
+            stmt.executeUpdate("insert into phrases values (seq_phrases.nextval, '"
                     + phrase.gettGerman() + "', '" + phrase.gettEnglish() + "', "
                     + phrase.getWord().getWord_id() + ")");
             stmt.execute("commit");
-        } catch (NumberFormatException e) {
-            System.err.println("phrase_id/word_id is not a number");
-            retValue = e.getMessage();
         } catch (SQLException e) {
-            System.err.println("Error at stmt: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            retValue = "Error: " + e.getMessage();
         }
 
         DBManager.close(stmt);
@@ -101,8 +101,8 @@ public class PhraseDetail {
     }
 
     @PUT
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String updatePhrase(Phrase phrase) throws IOException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updatePhrase(Phrase phrase) {
         String retValue = "updated";
 
         try {
@@ -111,12 +111,16 @@ public class PhraseDetail {
 
             stmt.executeUpdate("update phrases set tGerman = '" + phrase.gettGerman()
                     + "', tEnglish = '" + phrase.gettEnglish()
-                    + "', word_id = " + phrase.getWord().getWord_id() + " where phrase_id = " + phrase.getPhrase_id());
+                    + "', word_id = " + phrase.getWord().getWord_id() 
+                    + " where phrase_id = " + phrase.getPhrase_id());
 
             stmt.execute("commit");
         } catch (SQLException e) {
-            System.err.println("Error at stmt or rs: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            retValue = "Error: " + e.getMessage();
         }
 
         DBManager.close(stmt);
@@ -128,8 +132,8 @@ public class PhraseDetail {
     }
 
     @DELETE
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String deletePhrase(@QueryParam("phrase_id") String phrase_id) throws IOException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String deletePhrase(@QueryParam("phrase_id") String phrase_id) {
         String retValue = "deleted";
 
         try {
@@ -139,8 +143,11 @@ public class PhraseDetail {
             stmt.executeUpdate("delete from phrases where phrase_id = " + phrase_id);
             stmt.execute("commit");
         } catch (SQLException e) {
-            System.err.println("Error at stmt or rs: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            retValue = "Error: " + e.getMessage();
         }
 
         DBManager.close(stmt);

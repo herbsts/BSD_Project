@@ -73,24 +73,23 @@ public class RequestDetail {
     }
 
     @POST
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String addRequest(Request request) throws Exception {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String addRequest(Request request) {
         String retValue = "inserted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.executeUpdate("insert into requests values (" + request.getRequest_id() + ", "
-                    + request.getRequestDate()+ ", "
-                    + request.getEditDate() + ", '" + request.getStatus() + "', " 
-                    + request.getUser().getUser_id() + ")");
+            stmt.executeUpdate("insert into requests values (seq_requests.nextval, "
+                    + request.getRequestDate()+ ", " + request.getEditDate() + ", '" 
+                    + request.getStatus() + "', " + request.getUser().getUser_id() + ")");
             stmt.execute("commit");
-        } catch (NumberFormatException e) {
-            System.err.println("request_id/user_id is not a number");
-            retValue = e.getMessage();
         } catch (SQLException e) {
-            System.err.println("Error at stmt: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            retValue = "Error: " + e.getMessage();
         }
 
         DBManager.close(stmt);
@@ -102,8 +101,8 @@ public class RequestDetail {
     }
 
     @PUT
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String updateRequest(Request request) throws IOException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateRequest(Request request) {
         String retValue = "updated";
 
         try {
@@ -111,14 +110,17 @@ public class RequestDetail {
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             stmt.executeUpdate("update requests set req_date = " + request.getRequestDate() 
-                    + ", edit_date = " + request.getEditDate()
-                    + ", status = '" + request.getStatus() + "', user_id = " + request.getUser().getUser_id()
+                    + ", edit_date = " + request.getEditDate() + ", status = '" + request.getStatus() 
+                    + "', user_id = " + request.getUser().getUser_id()
                     + " where req_id = " + request.getRequest_id());
 
             stmt.execute("commit");
         } catch (SQLException e) {
-            System.err.println("Error at stmt or rs: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            retValue = "Error: " + e.getMessage();
         }
 
         DBManager.close(stmt);
@@ -130,8 +132,8 @@ public class RequestDetail {
     }
 
     @DELETE
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String deleteRequest(@QueryParam("request_id") String request_id) throws IOException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String deleteRequest(@QueryParam("request_id") String request_id) {
         String retValue = "deleted";
 
         try {
@@ -141,8 +143,11 @@ public class RequestDetail {
             stmt.executeUpdate("delete from requests where req_id = " + request_id);
             stmt.execute("commit");
         } catch (SQLException e) {
-            System.err.println("Error at stmt or rs: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            retValue = "Error: " + e.getMessage();
         }
 
         DBManager.close(stmt);
