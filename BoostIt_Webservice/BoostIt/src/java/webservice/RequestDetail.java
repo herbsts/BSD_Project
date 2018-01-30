@@ -5,7 +5,7 @@
  */
 package webservice;
 
-import com.DBManager;
+import connection.DBManager;
 import data.Request;
 import java.io.IOException;
 import java.sql.Connection;
@@ -47,7 +47,7 @@ public class RequestDetail {
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery("select * from requests where request_id = " + request_id);
+            rs = stmt.executeQuery("select * from requests where req_id = " + request_id);
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
         }
@@ -55,8 +55,9 @@ public class RequestDetail {
         if (rs != null) {
             try {
                 if (rs.next()) {
-                    retRequest = new Request(rs.getInt(1), rs.getString(2), rs.getDate(3),
-                            rs.getDate(4), rs.getString(5), new UserDetail().getUser(rs.getString(6)));
+                    retRequest = new Request(rs.getInt(1), rs.getDate("req_date"),
+                            rs.getDate("edit_date"), rs.getString(4), 
+                            new UserDetail().getUser(rs.getString(5)));
                 }
             } catch (SQLException e) {
                 System.err.println("Error at rs.next(): " + e.getMessage());
@@ -79,9 +80,9 @@ public class RequestDetail {
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.executeUpdate("insert into requests values (" + request.getRequest_id() + ", '"
-                    + request.getConcern() + "', " + request.getRequestDate()+ ", "
-                    + request.getEditDate() + ", " + request.getStatus() + ", " 
+            stmt.executeUpdate("insert into requests values (" + request.getRequest_id() + ", "
+                    + request.getRequestDate()+ ", "
+                    + request.getEditDate() + ", '" + request.getStatus() + "', " 
                     + request.getUser().getUser_id() + ")");
             stmt.execute("commit");
         } catch (NumberFormatException e) {
@@ -109,10 +110,10 @@ public class RequestDetail {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("update requests set concern = '" + request.getConcern()
-                    + "', requestDate = " + request.getRequestDate() + ", editDate = " + request.getEditDate()
+            stmt.executeUpdate("update requests set req_date = " + request.getRequestDate() 
+                    + ", edit_date = " + request.getEditDate()
                     + ", status = '" + request.getStatus() + "', user_id = " + request.getUser().getUser_id()
-                    + " where request_id = " + request.getRequest_id());
+                    + " where req_id = " + request.getRequest_id());
 
             stmt.execute("commit");
         } catch (SQLException e) {
@@ -137,7 +138,7 @@ public class RequestDetail {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("delete from requests where request_id = " + request_id);
+            stmt.executeUpdate("delete from requests where req_id = " + request_id);
             stmt.execute("commit");
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());

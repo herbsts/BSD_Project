@@ -5,7 +5,7 @@
  */
 package webservice;
 
-import com.DBManager;
+import connection.DBManager;
 import data.Request;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -51,8 +51,8 @@ public class RequestList {
         if (rs != null) {
             try {
                 while (rs.next()) {
-                    p = new Request(rs.getInt(1), rs.getString(2), rs.getDate(3),
-                            rs.getDate(4), rs.getString(5), new UserDetail().getUser(user_id));
+                    p = new Request(rs.getInt(1), rs.getDate("req_date"),
+                            rs.getDate("edit_date"), rs.getString(4), new UserDetail().getUser(user_id));
                     retList.add(p);
                 }
             } catch (SQLException e) {
