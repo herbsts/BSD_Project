@@ -15,18 +15,19 @@
             android:id="@+id/edtUsername"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:hint="Username/Email id"
+            android:hint="Username"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
         <EditText
+            android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edtPassword"
-            android:hint="Password"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/edtUsername"
             android:layout_marginBottom="5dp"
-            android:layout_alignParentStart="true" />
+            android:hint="Password"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnLogin"

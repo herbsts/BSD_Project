@@ -4,43 +4,28 @@
 
     android:background="@drawable/background_main">
 
-    <LinearLayout>
-        <EditText
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/edtTranslate"
-            android:layout_weight="10"/>
-
-        <ToggleButton
-            android:id="@+id/toggleLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_weight="0"
-            />
-    </LinearLayout>
-
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    </TableRow>
 
     <TableRow
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="150dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         >
         <TextView
-            android:text="German"
+            android:text="Number of Vocabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:layout_weight="0.4"
             android:layout_column="1" />
         <TextView
-            android:id="@+id/txvGermanFill"
+            android:id="@+id/txvNumberOfVocabsFill"
             android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="viewEnd"
-            android:layout_weight="1"
             android:textSize="20dp"
             />
     </TableRow>
@@ -51,19 +36,18 @@
         android:layout_marginRight="10dp">
 
         <TextView
-            android:text="English"
+            android:text="Correct Vocabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:layout_column="1"
-            android:layout_weight="0.4"/>
+            android:layout_column="1" />
         <TextView
-            android:id="@+id/txvEnglishFill"
+            android:id="@+id/txvCorrectVocabsFill"
             android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="viewEnd"
-            android:layout_weight="1"
+            android:textColor="@color/correct_answer"
             android:textSize="20dp"
             />
     </TableRow>
@@ -74,19 +58,18 @@
         android:layout_marginRight="10dp">
 
         <TextView
-            android:text="variety of English"
+            android:text="Wrong Vocabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:layout_weight="0.4"
             android:layout_column="1" />
         <TextView
-            android:id="@+id/txvVarietyFill"
+            android:id="@+id/txvWrongVocabsFill"
             android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="viewEnd"
-            android:layout_weight="1"
+            android:textColor="@color/wrong_answer"
             android:textSize="20dp"
             />
     </TableRow>
@@ -96,31 +79,28 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
-        <TextView
-            android:text="part of Speech"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_weight="0.4"
-            android:layout_column="1" />
-        <TextView
-            android:id="@+id/txvPartOfFill"
-            android:text=""
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewEnd"
-            android:layout_weight="1"
-            android:textSize="20dp"
-            />
-    </TableRow>
-
-    <Button
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+    <TextView
+        android:text="Percentage Correct"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Translate"
-        android:layout_marginTop="50dp"
-        android:id="@+id/btnTranslate">
-    </Button>
+        android:textSize="20dp"
+        android:layout_column="1" />
+    <TextView
+        android:id="@+id/txvPercentVocabsFill"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewEnd"
+        android:textSize="20dp"
+        />
+    </TableRow>
+
+        <Button
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finish"
+            android:id="@+id/btnFinish">
+        </Button>
 
 </TableLayout>

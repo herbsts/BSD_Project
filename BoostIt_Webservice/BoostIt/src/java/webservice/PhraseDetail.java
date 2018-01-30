@@ -5,7 +5,7 @@
  */
 package webservice;
 
-import com.DBManager;
+import connection.DBManager;
 import data.Phrase;
 import java.io.IOException;
 import java.sql.Connection;
