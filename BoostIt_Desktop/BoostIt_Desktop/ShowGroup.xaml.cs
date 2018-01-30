@@ -27,7 +27,9 @@ namespace BoostIt_Desktop
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
         {
-
+            ShowReference sr = new ShowReference(lblLoggedIn.Content.ToString());
+            sr.Show();
+            this.Close();
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
@@ -82,7 +84,9 @@ namespace BoostIt_Desktop
 
         private void BtnEditGroup_Click(object sender, RoutedEventArgs e)
         {
-            
+            EditGroup eg = new EditGroup(lblLoggedIn.Content.ToString());
+            eg.Show();
+            this.Close();
         }
 
         private void BtnShowUserStatistic_Click(object sender, RoutedEventArgs e)

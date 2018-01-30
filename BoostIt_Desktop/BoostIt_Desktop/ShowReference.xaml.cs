@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,27 +16,20 @@ using System.Windows.Shapes;
 namespace BoostIt_Desktop
 {
     /// <summary>
-    /// Interaction logic for CreateUser.xaml
+    /// Interaction logic for ShowReference.xaml
     /// </summary>
-    public partial class CreateUser : Window
+    public partial class ShowReference : Window
     {
-        public CreateUser(string username)
+        public ShowReference(string username)
         {
             InitializeComponent();
             lblLoggedIn.Content = username;
-        }
-
-        public CreateUser()
-        {
-            InitializeComponent();
+            string curDir = Directory.GetCurrentDirectory();
+            this.browserReference.Navigate(new Uri(String.Format("file:///{0}/reference.html", curDir)));
         }
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
-        {
-            ShowReference sr = new ShowReference(lblLoggedIn.Content.ToString());
-            sr.Show();
-            this.Close();
-        }
+        {/*Not necessary here because we are already in Dashboard Window here...*/}
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
@@ -57,7 +51,11 @@ namespace BoostIt_Desktop
         }
 
         private void BtnCreateUser_Click(object sender, RoutedEventArgs e)
-        {/*Not necessary here because we are already in CreateUser Window here...*/}
+        {
+            CreateUser cu = new CreateUser(lblLoggedIn.Content.ToString());
+            cu.Show();
+            this.Close();
+        }
 
         private void BtnShowUser_Click(object sender, RoutedEventArgs e)
         {

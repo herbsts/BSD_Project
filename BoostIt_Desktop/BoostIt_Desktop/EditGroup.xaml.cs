@@ -15,19 +15,14 @@ using System.Windows.Shapes;
 namespace BoostIt_Desktop
 {
     /// <summary>
-    /// Interaction logic for CreateUser.xaml
+    /// Interaction logic for EditGroup.xaml
     /// </summary>
-    public partial class CreateUser : Window
+    public partial class EditGroup : Window
     {
-        public CreateUser(string username)
+        public EditGroup(string username)
         {
             InitializeComponent();
             lblLoggedIn.Content = username;
-        }
-
-        public CreateUser()
-        {
-            InitializeComponent();
         }
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
@@ -57,7 +52,11 @@ namespace BoostIt_Desktop
         }
 
         private void BtnCreateUser_Click(object sender, RoutedEventArgs e)
-        {/*Not necessary here because we are already in CreateUser Window here...*/}
+        {
+            CreateUser cu = new CreateUser(lblLoggedIn.Content.ToString());
+            cu.Show();
+            this.Close();
+        }
 
         private void BtnShowUser_Click(object sender, RoutedEventArgs e)
         {
@@ -88,11 +87,7 @@ namespace BoostIt_Desktop
         }
 
         private void BtnEditGroup_Click(object sender, RoutedEventArgs e)
-        {
-            EditGroup eg = new EditGroup(lblLoggedIn.Content.ToString());
-            eg.Show();
-            this.Close();
-        }
+        {/*Not necessary here because we are already in Dashboard Window here...*/}
 
         private void BtnShowUserStatistic_Click(object sender, RoutedEventArgs e)
         {
