@@ -1,44 +1,37 @@
 package bsd.school2017.boost_it.pkgFragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import bsd.school2017.boost_it.MainActivity;
 import bsd.school2017.boost_it.R;
 import bsd.school2017.boost_it.pkgAdapter.DataModel;
 import bsd.school2017.boost_it.pkgAdapter.TestArrayAdapter;
-import bsd.school2017.boost_it.pkgEnumerations.enumLanguage;
+import bsd.school2017.boost_it.pkgData.Unit;
+import bsd.school2017.boost_it.pkgDatabase.Database;
 
-public class TestFragment extends Fragment {
+public class UnitFragment extends ListFragment {
     private ArrayList<DataModel> lstDataModel;
     private ListView lsvTest;
-    private FrameLayout testList;
-    private static MainActivity main;
+    private Database db;
 
     private static TestArrayAdapter adapter;
 
-    public TestFragment() {
+    public UnitFragment() {
         // Required empty public constructor
     }
 
-    public static TestFragment newInstance(MainActivity ma) {
-        TestFragment fragment = new TestFragment();
-        main = ma;
+    public static UnitFragment newInstance() {
+        UnitFragment fragment = new UnitFragment();
+        Bundle args = new Bundle();
         return fragment;
-    }
-
-    private void getAllViews(View v){
-        testList = (FrameLayout) v.findViewById(R.id.testList);
     }
 
     @Override
@@ -47,41 +40,49 @@ public class TestFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        db = new Database();
+
         View view = null;
         lstDataModel = new ArrayList<>();
-        getAllViews(inflater.inflate(R.layout.fragment_test, container, false));
-        fillDataModel();
+
         // Set the adapter
-        try{
+        try {
+            fillDataModel();
             view = inflater.inflate(R.layout.fragment_test, container, false);
-            lsvTest = (ListView)view.findViewById(R.id.lsvTests);
+            lsvTest = (ListView) view.findViewById(R.id.lsvTests);
             adapter = new TestArrayAdapter(lstDataModel, this.getContext());
             lsvTest.setAdapter(adapter);
             lsvTest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    main.changeFragment(VocabTestFragment.newInstance(main, lstDataModel.get(position).getDiff_number()), "Test");
+                    DataModel dataModel = lstDataModel.get(position);
+                    Toast.makeText(view.getContext(), dataModel.getName() + "\n" + dataModel.getDescription() + " Diff:" + dataModel.getDiff_number(), Toast.LENGTH_LONG)
+                            .show();
                 }
             });
-        }catch(Exception e){
-            Toast.makeText(this.getActivity(), "exception in frag test: " + e.getMessage(),
+        } catch (Exception e) {
+            Toast.makeText(this.getActivity(), "exception in frag unit: " + e.getMessage(),
                     Toast.LENGTH_SHORT).show();
         }
         return view;
     }
 
-    private void fillDataModel(){
-        lstDataModel.add(new DataModel("Simple Words", "basic words", enumLanguage.ENtoGER.name(), "if you have problems here, go hard or go home"));
-        lstDataModel.add(new DataModel("Laggers Fav Words", "nobody knows", enumLanguage.GERtoEN.name(), "ask lagger, nobody else knows smt here"));
+    private void fillDataModel() throws Exception {
+        ArrayList<Unit> allUnits = db.getUnits();
+        for(Unit u : allUnits){
+            lstDataModel.add(new DataModel(String.valueOf(u.getId()), u.getDescription(), "", u.getCreator().getUsername()));
+        }
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
     }
 
     @Override
-    public void onDetach() {super.onDetach();}
+    public void onDetach() {
+        super.onDetach();
+    }
 }
