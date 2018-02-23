@@ -1,14 +1,26 @@
 USERS:
 Get all users		192.168.x.x:8080/BoostIt/WS/UserList
-Get user by id		192.168.x.x:8080/BoostIt/WS/UserDetail/{id}
-Add/Update/Delete user	192.168.x.x:8080/BoostIt/WS/UserDetail
+Get user by id		192.168.x.x:8080/BoostIt/WS/UserDetail/{user_id}
+Add/Update user		192.168.x.x:8080/BoostIt/WS/UserDetail
+Delete user by id	192.168.x.x:8080/BoostIt/WS/UserDetail/{user_id}
 
 WORDS:
-Get the word		192.168.x.x:8080/BoostIt/WS/WordDetail/{id}   //Geht noch nicht
+Get German translation of English word	192.168.x.x:8080/BoostIt/WS/WordEnglish/{english_word}
+Get English translation of German word	192.168.x.x:8080/BoostIt/WS/WordGerman/{german_word}
 
 UNITS:
-Get all units		192.168.x.x:8080/BoostIt/WS/UnitList
-Get unit by id		192.168.x.x:8080/BoostIt/WS/UnitDetail/{id}
-Add/Update/Delete unit	192.168.x.x:8080/BoostIt/WS/UnitDetail
+Get all units of creator(user)	192.168.x.x:8080/BoostIt/WS/UnitList/{creator_id}
+Get unit by id			192.168.x.x:8080/BoostIt/WS/UnitDetail/{unit_id}
+Add/Update unit			192.168.x.x:8080/BoostIt/WS/UnitDetail
+Delete user by id		192.168.x.x:8080/BoostIt/WS/UnitDetail/{unit_id}
 
-Like the POS-Book-Project
+REQUESTS:
+Get all requests of user	192.168.x.x:8080/BoostIt/WS/RequestList/{user_id}
+Get request by id 		192.168.x.x:8080/BoostIt/WS/RequestDetail/{request_id}
+Add/Update request		192.168.x.x:8080/BoostIt/WS/RequestDetail
+Delete request by id		192.168.x.x:8080/BoostIt/WS/RequestDetail/{request_id}
+
+PHRASES:
+Database issues, need to talk to Lagger (paaaasst dos?)
+
+[Like the POS-Book-Project]

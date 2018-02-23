@@ -1,20 +1,28 @@
 package bsd.school2017.boost_it.pkgData;
 
+import java.io.Serializable;
+
 import bsd.school2017.boost_it.pkgEnumerations.enumRole;
 
 /**
  * Created by Martin on 23.11.2017.
  */
 
-public class User {
+public class User implements Serializable {
     private int user_id;
     private String username;
     private enumRole role;
+    private String password;
 
-    public User(int user_id, String username, enumRole role){
+    public User(int user_id, String username, String password, enumRole role){
         this.user_id = user_id;
         this.username = username;
         this.role = role;
+        this.password = password;
+    }
+
+    public User(){
+
     }
 
     public int getUser_id() {
@@ -40,4 +48,7 @@ public class User {
     public void setRole(enumRole role) {
         this.role = role;
     }
+
+    public String getPassword() { return password; }
 }
+

@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BoostIt_Desktop"
         mc:Ignorable="d"
-        Title="Login - BoostL" Height="720" Width="1280" Background="#006747"
+        Icon="pack://application:,,,../Resources/Logo_BoostIT.png"
+        Title="Login - BoostIT" Height="720" Width="1280" Background="#006747"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid Margin="0,0,-0.4,0.4">
         <Image Margin="537,81,537,0" Source="pack://application:,,,../Resources/Logo_BoostIT.png" Height="145" VerticalAlignment="Top"/>
         <Label HorizontalAlignment="Left" Margin="332,385,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblInfo" Content="Enter Username and Password to continue: " Margin="377,271,377,0" FontSize="24" FontWeight="Bold" Background="#FFFFFF" HorizontalContentAlignment="Center" Height="42" VerticalAlignment="Top"/>
+        <Label x:Name="lblInfo" Background="LightGreen" Content="Enter Username and Password to continue: " Margin="377,271,377,0" FontSize="24" FontWeight="Bold" HorizontalContentAlignment="Center" Height="42" VerticalAlignment="Top"/>
         <Label x:Name="lblUsername" Content="Username: " Margin="467,337,0,0" FontSize="20" FontWeight="Bold" Background="#FFFFFF" HorizontalContentAlignment="Center" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="115"/>
         <Label x:Name="lblPassword" Content="Password: " Margin="467,389,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Background="#FFFFFF" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="115"/>
         <TextBox x:Name="txtUsername" Margin="597,338,477,0" TextWrapping="Wrap" FontSize="20" FontWeight="Bold" Height="36" VerticalAlignment="Top"/>

@@ -5,20 +5,16 @@
  */
 package webservice;
 
-import com.DBManager;
+import connection.DBManager;
 import data.User;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -29,15 +25,16 @@ import javax.ws.rs.core.MediaType;
 @Path("UserList")
 public class UserList {
 
+    private Connection con = null;
+    private Statement stmt = null;
+    private ResultSet rs = null;
+
     public UserList() {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<User> getUsers() {
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
         User u = null;
         ArrayList<User> retList = new ArrayList();
 

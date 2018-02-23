@@ -7,4 +7,7 @@
 
     <item name="visible" type="id"/>
     <item name="masked" type="id"/>
+
+    <color name="correct_answer">#42f44b</color>
+    <color name="wrong_answer">#f44141</color>
 </resources>

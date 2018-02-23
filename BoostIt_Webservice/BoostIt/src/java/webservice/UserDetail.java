@@ -5,15 +5,12 @@
  */
 package webservice;
 
-import com.DBManager;
+import connection.DBManager;
 import data.User;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -41,7 +38,7 @@ public class UserDetail {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("{user_id}")
     public User getUser(@PathParam("user_id") String user_id) {
         User retUser = null;
@@ -75,23 +72,26 @@ public class UserDetail {
     }
 
     @POST
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String addUser(User user) throws Exception {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String addUser(User user) {
         String retValue = "inserted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.executeUpdate("insert into users values (" + user.getUser_id() + ", '"
+            stmt.executeUpdate("insert into users values (seq_userid.nextval, '"
                     + user.getUsername() + "', '" + user.getPassword() + "', "
                     + user.getRole() + ")");
             stmt.execute("commit");
         } catch (NumberFormatException e) {
-            System.err.println("user_id/role is not a number");
-            retValue = e.getMessage();
+            System.err.println("role is not a number: " + e.getMessage());
+            retValue = "role is not a number: " + e.getMessage();
         } catch (SQLException e) {
-            System.err.println("Error at stmt: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception ex) {
+            System.err.println("Error: " + ex.getMessage());
+            retValue = "Error: " + ex.getMessage();
         }
 
         DBManager.close(stmt);
@@ -103,8 +103,8 @@ public class UserDetail {
     }
 
     @PUT
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String updateUser(User user) throws IOException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateUser(User user) {
         String retValue = "updated";
 
         try {
@@ -117,8 +117,11 @@ public class UserDetail {
 
             stmt.execute("commit");
         } catch (SQLException e) {
-            System.err.println("Error at stmt or rs: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception ex) {
+            System.err.println("Error: " + ex.getMessage());
+            retValue = "Error: " + ex.getMessage();
         }
 
         DBManager.close(stmt);
@@ -130,19 +133,22 @@ public class UserDetail {
     }
 
     @DELETE
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String deleteUser(@QueryParam("user_id") String user_id) throws IOException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String deleteUser(@QueryParam("user_id") String user_id) {
         String retValue = "deleted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("delete from users where id = " + user_id);
+            stmt.executeUpdate("delete from users where user_id = " + user_id);
             stmt.execute("commit");
         } catch (SQLException e) {
-            System.err.println("Error at stmt or rs: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception ex) {
+            System.err.println("Error: " + ex.getMessage());
+            retValue = "Error: " + ex.getMessage();
         }
 
         DBManager.close(stmt);

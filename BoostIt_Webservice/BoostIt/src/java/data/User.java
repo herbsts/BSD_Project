@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class User {
+
     private int user_id;
     private String username;
     private String password;
@@ -21,7 +22,7 @@ public class User {
     public User() {
         this(-99, "no username", "no password", -1);
     }
-    
+
     public User(int user_id, String username, String password, int role) {
         this.user_id = user_id;
         this.username = username;

@@ -22,14 +22,16 @@ namespace BoostIt_Desktop
         public MainWindow()
         {
             InitializeComponent();
+            //txtUsername.Text = "Herbot";
+            //txtPassword.Password = "herbot";
         }
 
         private void OnBtnLoginClick(object sender, RoutedEventArgs e)
         {
-            /*if(txtUsername.Text.Length > 0 && txtUsername.Text.Length > 0)
+            if(txtUsername.Text.Length > 0 && txtUsername.Text.Length > 0)
             {
-                string retVal = Database.GetInstance().ChkLogin(txtUsername.Text, txtPassword.Password);
-                if(retVal != null)
+                bool retVal = Database.GetInstance().ChkLogin(txtUsername.Text, txtPassword.Password);
+                if(retVal)
                 {
                     Database.GetInstance().SetUser(txtUsername.Text, txtPassword.Password);
                     Dashboard d = new Dashboard(txtUsername.Text);
@@ -40,14 +42,14 @@ namespace BoostIt_Desktop
                 {
                     MessageBox.Show("Error: No user '" + txtUsername.Text + "' found!");
                 }
+                /*Dashboard d = new Dashboard("Herbot");
+                d.Show();
+                this.Close();*/
             }
             else
             {
                 MessageBox.Show("Enter a username and password to continue!");
-            }*/
-            Dashboard d = new Dashboard(txtUsername.Text);
-            d.Show();
-            this.Close();
+            }
         }
     }
 }

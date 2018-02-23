@@ -15,7 +15,7 @@
 --  DDL for Sequence SEQ_USERID
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "BOOSTL"."SEQ_USERID"  MINVALUE 0 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "BOOSTL"."SEQ_USERID"  MINVALUE 0 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 10 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence SEQ_UNITS
 --------------------------------------------------------

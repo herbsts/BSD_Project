@@ -1,44 +1,126 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
 
+    android:background="@drawable/background_main">
 
+    <LinearLayout>
+        <EditText
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/edtTranslate"
+            android:layout_weight="10"/>
 
-    <EditText
-        android:id="@+id/edtTranslate"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_x="0dp"
-        android:layout_y="87dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="61dp" />
-
-    <TextView
-        android:id="@+id/txvOutcome"
-        android:layout_width="match_parent"
-        android:layout_height="341dp"
-        android:layout_above="@+id/containerButtons"
-        android:layout_alignParentStart="true"
-        android:layout_x="2dp"
-        android:layout_y="220dp" />
-
-    <LinearLayout
-        android:id="@+id/containerButtons"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="bottom">
-
-        <Button
-            android:id="@+id/btnTranslate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/translate" />
+        <ToggleButton
+            android:id="@+id/toggleLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="0"
+            />
     </LinearLayout>
-</RelativeLayout>
+
+
+    <TableRow
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <TextView
+            android:text="German"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_weight="0.4"
+            android:layout_column="1" />
+        <TextView
+            android:id="@+id/txvGermanFill"
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:text="English"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_column="1"
+            android:layout_weight="0.4"/>
+        <TextView
+            android:id="@+id/txvEnglishFill"
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:text="variety of English"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_weight="0.4"
+            android:layout_column="1" />
+        <TextView
+            android:id="@+id/txvVarietyFill"
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:text="part of Speech"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_weight="0.4"
+            android:layout_column="1" />
+        <TextView
+            android:id="@+id/txvPartOfFill"
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            />
+    </TableRow>
+
+    <Button
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Translate"
+        android:layout_marginTop="50dp"
+        android:id="@+id/btnTranslate">
+    </Button>
+
+</TableLayout>
