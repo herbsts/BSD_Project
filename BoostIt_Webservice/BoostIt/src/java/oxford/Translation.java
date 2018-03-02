@@ -63,7 +63,7 @@ public class Translation {
         String tGerman = "no German translation";
         String tEnglish = "no English translation";
         String varietyOfEnglish = "no variety";
-        String partOfSpeech = "no part of speech";
+        String partOfSpeech = "no lexical category";
 
         try {
             JsonArray resultsArr = result.getJsonArray("results");

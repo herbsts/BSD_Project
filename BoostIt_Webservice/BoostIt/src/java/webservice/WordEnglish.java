@@ -31,13 +31,17 @@ public class WordEnglish {
         Word retWord = new Word();
 
         String configString = configurateTranslation(english_word);
-        
+
         Translation t = new Translation(configString);
-        
+
         try {
             retWord = t.translate();
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             retWord.settGerman("Fehler: " + ex.getMessage());
+        }
+
+        if (retWord != null && !wordAlreadyExists(retWord)) {
+            new WordDetail().addWord(retWord);
         }
 
         System.out.println("==============webservice BoostIt GET called TRANSLATION: " + retWord.toString());
@@ -48,5 +52,16 @@ public class WordEnglish {
     private String configurateTranslation(String word) {
         return "https://od-api.oxforddictionaries.com:443/api/v1/entries/en/"
                 + word.toLowerCase() + "/translations=de";
+    }
+    
+    private boolean wordAlreadyExists(Word word) {
+        boolean exists = false;
+        Word wordInDB = new WordDetail().getWordByTEnglish(word.gettEnglish());
+        
+        if (word.gettEnglish().equals(wordInDB.gettEnglish())) {
+            exists = true;
+        }
+        
+        return exists;
     }
 }

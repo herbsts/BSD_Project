@@ -35,15 +35,15 @@ public class PhraseList {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{english_word}")
-    public ArrayList<Phrase> getPhrases(@PathParam("english_word") String english_word) {
+    @Path("{word_id}")
+    public ArrayList<Phrase> getPhrases(@PathParam("word_id") String word_id) {
         Phrase p = null;
         ArrayList<Phrase> retList = new ArrayList();
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery("select * from phrases where word_id = " + english_word);
+            rs = stmt.executeQuery("select * from phrases where word_id = " + word_id);
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
         }
@@ -54,7 +54,7 @@ public class PhraseList {
                     p = new Phrase(Integer.parseInt(rs.getObject(1).toString()), 
                             rs.getObject(2).toString(), 
                             rs.getObject(3).toString(), 
-                            new WordEnglish().getGermanWord(english_word));
+                            new WordDetail().getWord(rs.getObject(4).toString()));
                     retList.add(p);
                 }
             } catch (SQLException e) {

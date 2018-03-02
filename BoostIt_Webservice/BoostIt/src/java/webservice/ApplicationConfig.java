@@ -39,6 +39,7 @@ public class ApplicationConfig extends Application {
         resources.add(webservice.UnitList.class);
         resources.add(webservice.UserDetail.class);
         resources.add(webservice.UserList.class);
+        resources.add(webservice.WordDetail.class);
         resources.add(webservice.WordEnglish.class);
         resources.add(webservice.WordGerman.class);
     }
