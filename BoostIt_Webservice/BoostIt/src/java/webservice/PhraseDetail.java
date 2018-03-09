@@ -7,6 +7,7 @@ package webservice;
 
 import connection.DBManager;
 import data.Phrase;
+import data.PhraseBelongs;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -154,5 +155,39 @@ public class PhraseDetail {
         System.out.println("==============webservice BoostIt DELETE called");
 
         return retValue;
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{phrase_id}/Unit/{unit_id}")
+    public PhraseBelongs getUnitFromPhrase(@PathParam("phrase_id") String phrase_id, @PathParam("unit_id") String unit_id) {
+        PhraseBelongs retUnit = null;
+
+        try {
+            con = DBManager.getConnection();
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = stmt.executeQuery("select * from phrasebelongs where phrase_id = " + phrase_id 
+                    + " and unit_id = " + unit_id);
+        } catch (SQLException e) {
+            System.err.println("Error at stmt or rs: " + e.getMessage());
+        }
+
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    retUnit = new PhraseBelongs(new PhraseDetail().getPhrase(rs.getObject(1).toString()),
+                            new UnitDetail().getUnit(rs.getObject(2).toString()));
+                }
+            } catch (SQLException e) {
+                System.err.println("Error at rs.next(): " + e.getMessage());
+            }
+        }
+
+        DBManager.close(rs);
+        DBManager.close(stmt);
+        DBManager.close(con);
+        System.out.println("==============webservice BoostIt GET called");
+
+        return retUnit;
     }
 }

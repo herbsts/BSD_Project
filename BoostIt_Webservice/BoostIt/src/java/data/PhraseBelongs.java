@@ -13,16 +13,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class PhraseBelongs {
-    private Unit unit;
     private Phrase phrase;
+    private Unit unit;
 
     public PhraseBelongs() {
-        this(new Unit(), new Phrase());
+        this(new Phrase(), new Unit());
     }
     
-    public PhraseBelongs(Unit unit, Phrase phrase) {
-        this.unit = unit;
+    public PhraseBelongs(Phrase phrase, Unit unit) {
         this.phrase = phrase;
+        this.unit = unit;
     }
 
     public Unit getUnit() {
