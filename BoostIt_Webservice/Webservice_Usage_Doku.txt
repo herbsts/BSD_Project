@@ -4,22 +4,33 @@ Get user by id		192.168.x.x:8080/BoostIt/WS/UserDetail/{user_id}
 Add/Update user		192.168.x.x:8080/BoostIt/WS/UserDetail
 Delete user by id	192.168.x.x:8080/BoostIt/WS/UserDetail/{user_id}
 
-USER-WORD:
+USER-WORD-RELATION:
 Get word of user by word id		192.168.x.x:8080/BoostIt/WS/UserDetail/{user_id}/Word/{word_id}
-Get word of user by english word	192.168.x.x:8080/BoostIt/WS/UserDetail/{user_id}/Word/{english_word} (funktioniert noch nicht)
 
-USER-PHRASE
+USER-PHRASE-RELATION:
 Get phrase of user	192.168.x.x:8080/BoostIt/WS/UserDetail/{user_id}/Phrase/{phrase_id}
 
-USER-TEACHER-CLASS
+USER-TEACHER-CLASS-RELATION:
 Get teacher and class of user	192.168.x.x:8080/BoostIt/WS/UserDetail/{user_id}/Teacher/{teacher_id}
 
 WORDS:
-Get German translation of English word	192.168.x.x:8080/BoostIt/WS/WordEnglish/{english_word} (temporär nicht verfügbar, bitte WordDetail verwenden)
-Get English translation of German word	192.168.x.x:8080/BoostIt/WS/WordGerman/{german_word} (temporär nicht verfügbar, bitte WordDetail verwenden)
+Get German translation of English word	192.168.x.x:8080/BoostIt/WS/WordEnglish/{english_word}
+Get English translation of German word	192.168.x.x:8080/BoostIt/WS/WordGerman/{german_word}
 Get word by id				192.168.x.x:8080/BoostIt/WS/WordDetail/{word_id}
+Get word by English word		192.168.x.x:8080/BoostIt/WS/WordDetail/{english_word}
 Add/Update word				192.168.x.x:8080/BoostIt/WS/WordDetail
 Delete word by id			192.168.x.x:8080/BoostIt/WS/WordDetail/{word_id}
+
+WORD-UNIT-RELATION:
+Get unit of word	192.168.x.x:8080/BoostIt/WS/WordDetail/{word_id}/Unit/{unit_id}
+
+PHRASES:
+Get phrase by id 	192.168.x.x:8080/BoostIt/WS/PhraseDetail/{phrase_id}
+Add/Update phrase	192.168.x.x:8080/BoostIt/WS/PhraseDetail
+Delete phrase by id	192.168.x.x:8080/BoostIt/WS/PhraseDetail/{phrase_id}
+
+PHRASE-UNIT-RELATION:
+Get unit of phrase	192.168.x.x:8080/BoostIt/WS/PhraseDetail/{phrase_id}/Unit/{unit_id}
 
 UNITS:
 Get all units of creator(user)	192.168.x.x:8080/BoostIt/WS/UnitList/{creator_id}
@@ -33,9 +44,4 @@ Get request by id 		192.168.x.x:8080/BoostIt/WS/RequestDetail/{request_id}
 Add/Update request		192.168.x.x:8080/BoostIt/WS/RequestDetail
 Delete request by id		192.168.x.x:8080/BoostIt/WS/RequestDetail/{request_id}
 
-PHRASES:
-Get phrase by id 		192.168.x.x:8080/BoostIt/WS/PhraseDetail/{phrase_id}
-Add/Update phrase		192.168.x.x:8080/BoostIt/WS/PhraseDetail
-Delete phrase by id		192.168.x.x:8080/BoostIt/WS/PhraseDetail/{phrase_id}
-
-[Like the POS-Book-Project]
+[Like the Book-Webservice-Project in POS]
