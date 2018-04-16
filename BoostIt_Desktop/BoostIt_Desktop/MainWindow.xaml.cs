@@ -40,7 +40,7 @@ namespace BoostIt_Desktop
                 }
                 else
                 {
-                    MessageBox.Show("Error: No user '" + txtUsername.Text + "' found!");
+                    MessageBox.Show("Error: No teacher '" + txtUsername.Text + "' found!");
                 }
                 /*Dashboard d = new Dashboard("Herbot");
                 d.Show();

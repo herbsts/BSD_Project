@@ -46,7 +46,7 @@ namespace BoostIt_Desktop
             }
             foreach (User u in users)
             {
-                if (username.Equals(u.username))
+                if (username.Equals(u.username) && u.role == 0)
                     retVal = true;
             }
             return retVal;

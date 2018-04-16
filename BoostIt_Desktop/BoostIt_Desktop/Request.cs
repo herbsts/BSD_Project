@@ -11,14 +11,16 @@ namespace BoostIt_Desktop
         private int request_id { get; set; }
         private DateTime requestDate { get; set; }
         private DateTime editDate { get; set; }
+        private string message { get; set; }
         private string status { get; set; }
         private User user { get; set; }
 
-        public Request(int request_id, DateTime requestDate, DateTime editDate, string status, User user)
+        public Request(int request_id, DateTime requestDate, DateTime editDate, string message, string status, User user)
         {
             this.request_id = request_id;
             this.requestDate = requestDate;
             this.editDate = editDate;
+            this.message = message;
             this.status = status;
             this.user = user;
         }
