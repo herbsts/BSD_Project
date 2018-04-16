@@ -6,8 +6,8 @@
 package webservice;
 
 import connection.DBManager;
-import data.Phrase;
-import data.PhraseBelongs;
+import data.Word;
+import data.WordBelongs;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,26 +28,26 @@ import javax.ws.rs.core.MediaType;
  *
  * @author schueler
  */
-@Path("PhraseDetail")
-public class PhraseDetail {
+@Path("WordDetail")
+public class WordDetail {
 
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
 
-    public PhraseDetail() {
+    public WordDetail() {
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{phrase_id}")
-    public Phrase getPhrase(@PathParam("phrase_id") String phrase_id) {
-        Phrase retPhrase = null;
+    @Path("{word_id}")
+    public Word getWord(@PathParam("word_id") String word_id) {
+        Word retWord = null;
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery("select * from phrases where phrase_id = " + phrase_id);
+            rs = stmt.executeQuery("select * from words where word_id = " + word_id);
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
         }
@@ -55,13 +55,17 @@ public class PhraseDetail {
         if (rs != null) {
             try {
                 if (rs.next()) {
-                    retPhrase = new Phrase(Integer.parseInt(rs.getObject(1).toString()),
+                    retWord = new Word(Integer.parseInt(rs.getObject(1).toString()),
                             rs.getObject(2).toString(), rs.getObject(3).toString(),
-                            new WordDetail().getWord(rs.getObject(4).toString()));
+                            rs.getString(4), rs.getString(5), rs.getString(6));
                 }
             } catch (SQLException e) {
                 System.err.println("Error at rs.next(): " + e.getMessage());
             }
+        }
+        
+        if (retWord == null) {
+            retWord = getWordByTEnglish(word_id);
         }
 
         DBManager.close(rs);
@@ -69,20 +73,21 @@ public class PhraseDetail {
         DBManager.close(con);
         System.out.println("==============webservice BoostIt GET called");
 
-        return retPhrase;
+        return retWord;
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public String addPhrase(Phrase phrase) {
+    public String addWord(Word word) {
         String retValue = "inserted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.executeUpdate("insert into phrases values (seq_phrases.nextval, '"
-                    + phrase.gettGerman() + "', '" + phrase.gettEnglish() + "', "
-                    + phrase.getWord().getWord_id() + ")");
+            stmt.executeUpdate("insert into words values (seq_words.nextval, '"
+                    + word.gettGerman() + "', '" + word.gettEnglish() + "', '" 
+                    + word.getVarietyOfEnglish() + "', '" + word.getPartOfSpeech() 
+                    + "', '" + word.getUsage() + "')");
             stmt.execute("commit");
         } catch (SQLException e) {
             System.err.println("SQL-Error at stmt: " + e.getMessage());
@@ -102,17 +107,19 @@ public class PhraseDetail {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updatePhrase(Phrase phrase) {
+    public String updateWord(Word word) {
         String retValue = "updated";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("update phrases set tGerman = '" + phrase.gettGerman()
-                    + "', tEnglish = '" + phrase.gettEnglish()
-                    + "', word_id = " + phrase.getWord().getWord_id() 
-                    + " where phrase_id = " + phrase.getPhrase_id());
+            stmt.executeUpdate("update words set tGerman = '" + word.gettGerman()
+                    + "', tEnglish = '" + word.gettEnglish()
+                    + "', variety = '" + word.getVarietyOfEnglish()
+                    + "', pos = '" + word.getPartOfSpeech()
+                    + "', usage = '" + word.getUsage()
+                    + "' where word_id = " + word.getWord_id());
 
             stmt.execute("commit");
         } catch (SQLException e) {
@@ -133,14 +140,14 @@ public class PhraseDetail {
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public String deletePhrase(@QueryParam("phrase_id") String phrase_id) {
+    public String deleteWord(@QueryParam("word_id") String word_id) {
         String retValue = "deleted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-            stmt.executeUpdate("delete from phrases where phrase_id = " + phrase_id);
+            stmt.executeUpdate("delete from words where word_id = " + word_id);
             stmt.execute("commit");
         } catch (SQLException e) {
             System.err.println("SQL-Error at stmt: " + e.getMessage());
@@ -159,14 +166,14 @@ public class PhraseDetail {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{phrase_id}/Unit/{unit_id}")
-    public PhraseBelongs getUnitFromPhrase(@PathParam("phrase_id") String phrase_id, @PathParam("unit_id") String unit_id) {
-        PhraseBelongs retUnit = null;
+    @Path("{word_id}/Unit/{unit_id}")
+    public WordBelongs getUnitFromWord(@PathParam("word_id") String word_id, @PathParam("unit_id") String unit_id) {
+        WordBelongs retUnit = null;
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery("select * from phrasebelongs where phrase_id = " + phrase_id 
+            rs = stmt.executeQuery("select * from wordbelongs where word_id = " + word_id 
                     + " and unit_id = " + unit_id);
         } catch (SQLException e) {
             System.err.println("Error at stmt or rs: " + e.getMessage());
@@ -175,7 +182,7 @@ public class PhraseDetail {
         if (rs != null) {
             try {
                 if (rs.next()) {
-                    retUnit = new PhraseBelongs(new PhraseDetail().getPhrase(rs.getObject(1).toString()),
+                    retUnit = new WordBelongs(new WordDetail().getWord(rs.getObject(1).toString()),
                             new UnitDetail().getUnit(rs.getObject(2).toString()));
                 }
             } catch (SQLException e) {
@@ -189,5 +196,36 @@ public class PhraseDetail {
         System.out.println("==============webservice BoostIt GET called");
 
         return retUnit;
+    }
+    
+    public Word getWordByTEnglish(String english_word) {
+        Word retWord = null;
+
+        try {
+            con = DBManager.getConnection();
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = stmt.executeQuery("select * from words where tEnglish = '" + english_word.toLowerCase() + "'");
+        } catch (SQLException e) {
+            System.err.println("Error at stmt or rs: " + e.getMessage());
+        }
+
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    retWord = new Word(Integer.parseInt(rs.getObject(1).toString()),
+                            rs.getObject(2).toString(), rs.getObject(3).toString(),
+                            rs.getString(4), rs.getString(5), rs.getString(6));
+                }
+            } catch (SQLException e) {
+                System.err.println("Error at rs.next(): " + e.getMessage());
+            }
+        }
+
+        DBManager.close(rs);
+        DBManager.close(stmt);
+        DBManager.close(con);
+        System.out.println("==============webservice BoostIt GET called");
+
+        return retWord;
     }
 }

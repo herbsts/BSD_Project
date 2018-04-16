@@ -30,14 +30,21 @@ public class WordEnglish {
     public Word getGermanWord(@PathParam("english_word") String english_word) {
         Word retWord = new Word();
 
-        String configString = configurateTranslation(english_word);
-        
-        Translation t = new Translation(configString);
-        
-        try {
-            retWord = t.translate();
-        } catch(Exception ex) {
-            retWord.settGerman("Fehler: " + ex.getMessage());
+        if (!wordAlreadyExists(english_word)) {
+            String configString = configurateTranslation(english_word);
+
+            Translation t = new Translation(configString);
+
+            try {
+                retWord = t.translate();
+            } catch (Exception ex) {
+                retWord.settGerman("Fehler: " + ex.getMessage());
+            }
+
+            String ret = new WordDetail().addWord(retWord);
+            System.out.println("!!!! " + ret);
+        } else {
+            retWord = new WordDetail().getWordByTEnglish(english_word);
         }
 
         System.out.println("==============webservice BoostIt GET called TRANSLATION: " + retWord.toString());
@@ -48,5 +55,21 @@ public class WordEnglish {
     private String configurateTranslation(String word) {
         return "https://od-api.oxforddictionaries.com:443/api/v1/entries/en/"
                 + word.toLowerCase() + "/translations=de";
+    }
+
+    private boolean wordAlreadyExists(String english_word) {
+        boolean exists = false;
+
+        try {
+            Word wordInDB = new WordDetail().getWordByTEnglish(english_word);
+
+            if (english_word.equals(wordInDB.gettEnglish())) {
+                exists = true;
+            }
+        } catch (NullPointerException e) {
+            System.err.println("WordAlreadyExists() ERROR: " + e.getMessage());
+        }
+
+        return exists;
     }
 }

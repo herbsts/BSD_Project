@@ -9,8 +9,6 @@ import data.Word;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -65,7 +63,7 @@ public class Translation {
         String tGerman = "no German translation";
         String tEnglish = "no English translation";
         String varietyOfEnglish = "no variety";
-        String partOfSpeech = "no part of speech";
+        String partOfSpeech = "no lexical category";
 
         try {
             JsonArray resultsArr = result.getJsonArray("results");

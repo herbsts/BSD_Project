@@ -7,7 +7,6 @@ package webservice;
 
 import connection.DBManager;
 import data.Unit;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,22 +72,22 @@ public class UnitDetail {
     }
 
     @POST
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String addUnit(Unit unit) throws Exception {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String addUnit(Unit unit) {
         String retValue = "inserted";
 
         try {
             con = DBManager.getConnection();
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            stmt.executeUpdate("insert into units values (" + unit.getUnit_id() 
-                    + ", '" + unit.getDescripiton() + "', '" + unit.getCreator().getUser_id() + ")");
+            stmt.executeUpdate("insert into units values (seq_units.nextval, '" 
+                    + unit.getDescripiton() + "', " + unit.getCreator().getUser_id() + ")");
             stmt.execute("commit");
-        } catch (NumberFormatException e) {
-            System.err.println("unit_id is not a number");
-            retValue = e.getMessage();
         } catch (SQLException e) {
-            System.err.println("Error at stmt: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            retValue = "Error: " + e.getMessage();
         }
 
         DBManager.close(stmt);
@@ -100,8 +99,8 @@ public class UnitDetail {
     }
 
     @PUT
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String updateUnit(Unit unit) throws IOException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateUnit(Unit unit) {
         String retValue = "updated";
 
         try {
@@ -109,12 +108,15 @@ public class UnitDetail {
             stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             stmt.executeUpdate("update units set description = '" + unit.getDescripiton()
-                    + " where unit_id = " + unit.getUnit_id());
+                    + "', " + unit.getCreator().getUser_id() + " where unit_id = " + unit.getUnit_id());
 
             stmt.execute("commit");
         } catch (SQLException e) {
-            System.err.println("Error at stmt or rs: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            retValue = "Error: " + e.getMessage();
         }
 
         DBManager.close(stmt);
@@ -126,8 +128,8 @@ public class UnitDetail {
     }
 
     @DELETE
-    @Consumes({MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
-    public String deleteUnit(@QueryParam("unit_id") String unit_id) throws IOException {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String deleteUnit(@QueryParam("unit_id") String unit_id) {
         String retValue = "deleted";
 
         try {
@@ -137,8 +139,11 @@ public class UnitDetail {
             stmt.executeUpdate("delete from units where unit_id = " + unit_id);
             stmt.execute("commit");
         } catch (SQLException e) {
-            System.err.println("Error at stmt or rs: " + e.getMessage());
-            retValue = e.getMessage();
+            System.err.println("SQL-Error at stmt: " + e.getMessage());
+            retValue = "SQL-Error at stmt: " + e.getMessage();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            retValue = "Error: " + e.getMessage();
         }
 
         DBManager.close(stmt);

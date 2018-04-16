@@ -5,7 +5,7 @@
 
 **Begin:** 22.09.20I7
 
-**End:** 08.0I.20I8
+**End:** 17.04.20I8
 
 ## Aim
 Implement a useful tool for improving your English skills.

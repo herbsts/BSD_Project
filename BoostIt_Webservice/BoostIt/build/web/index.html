@@ -11,6 +11,32 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>works</div>
+        <h2>GET ACTIONS</h2>
+        <h4>USERS</h4>
+        <a href="http://localhost:8080/BoostIt/WS/UserList">All Users</a><br/>
+        <a href="http://localhost:8080/BoostIt/WS/UserDetail/1">User with ID 1</a><br/>
+        <h4>USER-WORD-RELATION</h4>
+        <a href="http://localhost:8080/BoostIt/WS/UserDetail/1/Word/1">Word with ID 1 from User with ID 1</a><br/>
+        <h4>USER-PHRASE-RELATION</h4>
+        <a href="http://localhost:8080/BoostIt/WS/UserDetail/2/Phrase/1">Phrase with ID 1 from User with ID 2</a><br/>
+        <h4>USER-TEACHER-CLASS-RELATION</h4>
+        <a href="http://localhost:8080/BoostIt/WS/UserDetail/1/Teacher/1">Teacher with ID 1 and Class from User with ID 1</a><br/>
+        <h4>WORDS</h4>
+        <a href="http://localhost:8080/BoostIt/WS/WordEnglish/shark">Oxford Translation of the English word "shark"</a><br/>
+        <a href="http://localhost:8080/BoostIt/WS/WordGerman/elefant">Oxford Translation of the German word "Elefant"</a><br/>
+        <a href="http://localhost:8080/BoostIt/WS/WordDetail/5">Word with ID 5</a><br/>
+        <a href="http://localhost:8080/BoostIt/WS/WordDetail/dog">Translation by English word "dog" (has to exist in database)</a><br/>
+        <h4>WORD-UNIT-RELATION</h4>
+        <a href="http://localhost:8080/BoostIt/WS/WordDetail/1/Unit/1">Unit with ID 1 from Word with ID 1</a><br/>
+        <h4>PHRASES</h4>
+        <a href="http://localhost:8080/BoostIt/WS/PhraseDetail/2">Phrase with ID 2</a><br/>
+        <h4>PHRASE-UNIT-RELATION</h4>
+        <a href="http://localhost:8080/BoostIt/WS/PhraseDetail/2/Unit/1">Unit with ID 1 from Phrase with ID 2</a><br/>
+        <h4>UNITS</h4>
+        <a href="http://localhost:8080/BoostIt/WS/UnitList/3">All Units of Creator(User) with ID 3</a><br/>
+        <a href="http://localhost:8080/BoostIt/WS/UnitDetail/1">Unit with ID 1</a><br/>
+        <h4>REQUESTS</h4>
+        <a href="http://localhost:8080/BoostIt/WS/RequestList/4">All Requests of User with ID 4</a><br/>
+        <a href="http://localhost:8080/BoostIt/WS/RequestDetail/2">Request with ID 2</a><br/>
     </body>
 </html>

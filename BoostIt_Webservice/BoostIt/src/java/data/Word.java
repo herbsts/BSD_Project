@@ -22,7 +22,7 @@ public class Word {
     private String usage;               //soll spaeter haendisch nachgetragen werden
 
     public Word() {
-        this(-99, "no German translation", "no English translation", "no variety", "no part of speech", "no specified usage");
+        this(-99, "no German translation", "no English translation", "no variety", "no lexical category", "no specified usage");
     }
     
     public Word(int word_id, String tGerman, String tEnglish, String varietyOfEnglish, String partOfSpeech, String usage) {
