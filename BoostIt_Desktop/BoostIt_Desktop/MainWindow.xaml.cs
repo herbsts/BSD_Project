@@ -33,7 +33,7 @@ namespace BoostIt_Desktop
                 bool retVal = Database.GetInstance().ChkLogin(txtUsername.Text, txtPassword.Password);
                 if(retVal)
                 {
-                    Database.GetInstance().SetUser(txtUsername.Text, txtPassword.Password);
+                    Database.GetInstance().LoadRequests();
                     Dashboard d = new Dashboard(txtUsername.Text);
                     d.Show();
                     this.Close();

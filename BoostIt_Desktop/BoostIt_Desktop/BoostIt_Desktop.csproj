@@ -69,6 +69,8 @@
     <Compile Include="EditUser.xaml.cs">
       <DependentUpon>EditUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EnumRoles.cs" />
+    <Compile Include="Request.cs" />
     <Compile Include="ShowGroup.xaml.cs">
       <DependentUpon>ShowGroup.xaml</DependentUpon>
     </Compile>

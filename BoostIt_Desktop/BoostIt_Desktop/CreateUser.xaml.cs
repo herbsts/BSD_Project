@@ -122,17 +122,10 @@ namespace BoostIt_Desktop
             }
             else
             {
-                int role;
-                if (cbRole.SelectedItem.ToString().Equals("Student"))
-                    role = 0;
-                else if (cbRole.SelectedItem.ToString().Equals("Teacher"))
-                    role = 1;
-                else
-                    role = -1;
-
-                User usrToInsert = new User(-1, txtName.Text, txtPassword.Password, role);
-                Database.GetInstance().InsertUser(usrToInsert);
-                MessageBox.Show("User inserted successfully.");
+                User usrToInsert = new User(-1, txtName.Text, txtPassword.Password, (EnumRoles)Enum.Parse(typeof(EnumRoles),cbRole.SelectedItem.ToString()));
+                Console.WriteLine(usrToInsert);
+                string response = Database.GetInstance().InsertUser(usrToInsert);
+                MessageBox.Show(response,"Status of user insert");
             }
         }
 

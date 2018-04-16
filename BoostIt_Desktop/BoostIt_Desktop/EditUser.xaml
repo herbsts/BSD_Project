@@ -57,7 +57,7 @@
         <Label x:Name="lblUsername" Content="Username: " Margin="555,354,774.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblPassword" Content="Password: " Margin="555,413,779.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <TextBox x:Name="txtName" Background="LightGreen" Margin="665,354,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
-        <PasswordBox x:Name="txtPassword" Background="LightGreen" Margin="665,413,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
+        <TextBox x:Name="txtPassword" Background="LightGreen" Margin="665,413,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
         <Label x:Name="lblRole" Content="Role: " Margin="555,472,779.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <ComboBox x:Name="cbRole" Margin="665,472,505.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
         <Button x:Name="btnSaveChanges" Background="White" Content="Save Changes" Margin="665,531,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Width="130" Click="BtnSaveChanges_Click" />

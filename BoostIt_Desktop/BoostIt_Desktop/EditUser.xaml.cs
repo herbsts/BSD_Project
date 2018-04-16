@@ -25,12 +25,7 @@ namespace BoostIt_Desktop
             InitializeComponent();
             lblLoggedIn.Content = username;
             cbUsers.ItemsSource = Database.GetInstance().GetUsers();
-            var dataSource = new List<string>
-            {
-                "Student",
-                "Teacher"
-            };
-            cbRole.ItemsSource = dataSource;
+            cbRole.ItemsSource = new List<EnumRoles> { EnumRoles.Student,EnumRoles.Teacher};
         }
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
@@ -110,29 +105,33 @@ namespace BoostIt_Desktop
         private void CbUsers_SelectionChanged(object sender, RoutedEventArgs e)
         {
             selectedUser = (User)cbUsers.SelectedItem;
-            txtName.Text = selectedUser.Username;
-            txtPassword.Password = selectedUser.Password;
-            cbRole.SelectedItem = selectedUser.Role;
+            if(selectedUser != null)
+            {
+                txtName.Text = selectedUser.username;
+                txtPassword.Text = selectedUser.password;
+                cbRole.SelectedItem = selectedUser.role;
+            }
         }
 
         private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            Database.GetInstance().RemoveUser(selectedUser);
-            int newRole = -1;
-            if (cbRole.SelectedItem.ToString().Equals("Student"))
-                newRole = 0;
+            User updatedUser = new User(selectedUser.user_id, txtName.Text, txtPassword.Text, (EnumRoles)cbRole.SelectedItem);
+            if (updatedUser.Equals(selectedUser))
+            {
+                MessageBox.Show("No changes were made.");
+            }
             else
-                newRole = 1;
-            User updatedUser = new User(selectedUser.Id, txtName.Text, txtPassword.Password, newRole);
-            Database.GetInstance().InsertUser(selectedUser);
-            MessageBox.Show("User upated successfully.");
+            {
+                string response = Database.GetInstance().UpdateUser(updatedUser);
+                MessageBox.Show(response,"Status of user update");
+            }
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             cbUsers.SelectedItem = null;
             txtName.Text = "";
-            txtPassword.Password = "";
+            txtPassword.Text = "";
             cbRole.SelectedItem = null;
         }
     }

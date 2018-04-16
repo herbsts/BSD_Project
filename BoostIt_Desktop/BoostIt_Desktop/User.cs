@@ -8,27 +8,41 @@ namespace BoostIt_Desktop
 {
     class User
     {
-        public int Id { get; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
+        public int user_id { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public EnumRoles role { get; set; }
 
-        public User(int id, string username, string password, int roleId)
+        public User(int id, string username, string password, EnumRoles role)
         {
-            this.Id = id;
-            this.Username = username;
-            this.Password = password;
-            if (roleId == 0)
-                Role = "Student";
-            else if (roleId == 1)
-                Role = "Teacher";
+            this.user_id = id;
+            this.username = username;
+            this.password = password;
+            this.role = role;
+        }
+        
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+            bool retVal = false;
+            if (obj == null || GetType() != obj.GetType())
+            {
+                retVal = false;
+            }
             else
-                Role = "Other";
+            {
+                User u = (User)obj;
+                if (u.username.Equals(this.username) && u.password.Equals(this.password) && u.role.Equals(this.role))
+                {
+                    retVal = true;
+                }
+            }
+            return retVal;
         }
 
         public override string ToString()
         {
-            return "{User: Id=" + Id + ", Username=" + Username + ", Password=" + Password + ", Role=" + Role + "} ";
+            return username + ", " + role;
         }
     }
 }

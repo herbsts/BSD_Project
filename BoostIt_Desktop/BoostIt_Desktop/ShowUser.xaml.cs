@@ -19,11 +19,13 @@ namespace BoostIt_Desktop
     /// </summary>
     public partial class ShowUser : Window
     {
+        List<User> users;
         public ShowUser(string username)
         {
             InitializeComponent();
             lblLoggedIn.Content = username;
             listUsers.ItemsSource = Database.GetInstance().GetUsers();
+            users = listUsers.Items.OfType<User>().ToList<User>();
         }
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
@@ -102,16 +104,52 @@ namespace BoostIt_Desktop
 
         private void BtnDeleteSelectedUser_Click(object sender, RoutedEventArgs e)
         {
-            if(listUsers.SelectedItem == null)
+            if (listUsers.SelectedItem == null)
             {
                 MessageBox.Show("Select a user first!");
             }
             else
             {
-                Database.GetInstance().RemoveUser((User)listUsers.SelectedItem);
+                string response = Database.GetInstance().RemoveUser((User)listUsers.SelectedItem);
                 listUsers.ItemsSource = null;
                 listUsers.ItemsSource = Database.GetInstance().GetUsers();
-                MessageBox.Show("User deleted successfully.");
+                MessageBox.Show(response);
+            }
+        }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtName.Text.ToString().Equals(""))
+            {
+                listUsers.ItemsSource = users;
+            }
+            else
+            {
+                List<User> foundUsers = new List<User>();
+                foreach(User u in users)
+                {
+                    if (u.username.ToLower().Equals(txtName.Text.ToLower()))
+                        foundUsers.Add(u);
+                }
+                listUsers.ItemsSource = foundUsers;
+            }
+        }
+
+        private void BtnShowUserDetails_Click(object sender, RoutedEventArgs e)
+        {
+            if (listUsers.SelectedItem == null)
+            {
+                MessageBox.Show("Select a user first!");
+            }
+            else
+            {
+                MessageBox.Show
+                (
+                    "user_id: " + ((User)listUsers.SelectedItem).user_id + 
+                    "\nusername: "+ ((User)listUsers.SelectedItem).username + 
+                    "\npassword: "+ ((User)listUsers.SelectedItem).password + 
+                    "\nrole: "+ ((User)listUsers.SelectedItem).role,"Details for user '" + ((User)listUsers.SelectedItem).username + "'"
+                );
             }
         }
     }

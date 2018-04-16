@@ -15,8 +15,10 @@ namespace BoostIt_Desktop
     class Database
     {
         private string cs = ConfigurationManager.ConnectionStrings["OracleDatabase"].ConnectionString;
+        private string basicConnectionString = "http://192.168.1.5:8080/BoostIt/WS/";
         private static Database instance;
-        private List<User> users = new List<User>();
+        private List<Request> requests = new List<Request>();
+
         public Database() { }
         public static Database GetInstance()
         {
@@ -27,49 +29,9 @@ namespace BoostIt_Desktop
             return instance;
         }
 
-        public IEnumerable LoadUsers()
-        {
-            WebRequest request = WebRequest.Create("http://192.168.194.206:8080/BoostIt/WS/UserList");
-            Console.WriteLine(request.GetResponse().GetResponseStream());
-            request.Method = "GET";
-            WebResponse response = request.GetResponse();
-            users.Clear();
-            using (var webserviceResponse = (WebResponse)request.GetResponse())
-            {
-                using (var reader = new StreamReader(webserviceResponse.GetResponseStream()))
-                {
-                    string json = reader.ReadToEnd();
-                    users = JsonConvert.DeserializeObject<List<User>>(json);
-                }
-            }
-            return users;
-        }
-
-        public IEnumerable GetUsers()
-        {
-            return users;
-        }
-
         public bool ChkLogin(string username, string password)
         {
-            /*string retVal = null;
-            String commandText = "SELECT username FROM USERS WHERE username LIKE '%"+username+"%' AND password LIKE '%"+password+"%'";
-            using (OleDbConnection conn = new OleDbConnection(cs))
-            {
-                OleDbCommand cmd = new OleDbCommand(commandText, conn);
-                conn.Open();
-                OleDbDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    retVal = Convert.ToString(reader.GetValue(0));
-                }
-                conn.Close();
-            }
-
-            return retVal;*/
-
-            WebRequest request = WebRequest.Create("http://192.168.194.206:8080/BoostIt/WS/UserList");
-            Console.WriteLine(request.GetResponse().GetResponseStream());
+            WebRequest request = WebRequest.Create(basicConnectionString + "UserList");
             request.Method = "GET";
             WebResponse response = request.GetResponse();
             List<User> users;
@@ -82,32 +44,41 @@ namespace BoostIt_Desktop
                     users = JsonConvert.DeserializeObject<List<User>>(json);
                 }
             }
-            foreach(User u in users)
+            foreach (User u in users)
             {
-                if (username.Equals(u.Username))
+                if (username.Equals(u.username))
                     retVal = true;
             }
             return retVal;
         }
 
-        internal void SetUser(string username, string password)
+        #region/********User-Management********/
+            #region/********GET-Finished********/
+        public IEnumerable GetUsers()
         {
-            //u = new User(username, password);
+            WebRequest request = WebRequest.Create(basicConnectionString + "UserList");
+            request.Method = "GET";
+            WebResponse response = request.GetResponse();
+            List<User> users = new List<User>();
+            using (var webserviceResponse = (WebResponse)request.GetResponse())
+            {
+                using (var reader = new StreamReader(webserviceResponse.GetResponseStream()))
+                {
+                    string json = reader.ReadToEnd();
+                    users = JsonConvert.DeserializeObject<List<User>>(json);
+                }
+            }
+            return users;
         }
-
-        public void RemoveUser(User selectedItem)
+        #endregion
+            #region/********ADD-Finished********/
+        public string InsertUser(User usrToInsert)
         {
-            users.Remove(selectedItem);
-        }
+            string jsonStr = JsonConvert.SerializeObject(usrToInsert, Formatting.Indented);
 
-        public void InsertUser(User usrToInsert)
-        {
-            /*string json = JsonConvert.SerializeObject(usrToInsert, Formatting.Indented);
+            WebRequest request = WebRequest.Create(basicConnectionString + "UserDetail");
 
-            var request = WebRequest.Create("http://192.168.194.206:8080/BoostIt/WS/UserDetail");
-
-            var data = Encoding.ASCII.GetBytes(json);
-
+            byte[] data = Encoding.UTF8.GetBytes(jsonStr);
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = data.Length;
@@ -117,11 +88,72 @@ namespace BoostIt_Desktop
                 stream.Write(data, 0, data.Length);
             }
 
-            var response = (WebResponse)request.GetResponse();
+            WebResponse response = request.GetResponse();
 
-            string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            return responseString;*/
-            users.Add(usrToInsert);
+            string status = ((HttpWebResponse)response).StatusDescription;
+            return status;
         }
+        #endregion
+            #region/********REMOVE-Finished********/
+        public string RemoveUser(User usrToRemove)
+        {
+            WebRequest request = WebRequest.Create(basicConnectionString + "UserDetail?user_id="+usrToRemove.user_id);
+            
+            request.Method = "DELETE";
+            request.ContentType = "application/json";
+            WebResponse response = request.GetResponse();
+            string status = ((HttpWebResponse)response).StatusDescription;
+
+            return status;
+        }
+        #endregion
+            #region/********UPDATE-Finished********/
+        public string UpdateUser(User updatedUser)
+        {
+            string jsonStr = JsonConvert.SerializeObject(updatedUser, Formatting.Indented);
+
+            WebRequest request = WebRequest.Create(basicConnectionString + "UserDetail");
+
+            byte[] data = Encoding.UTF8.GetBytes(jsonStr);
+            request.Method = "PUT";
+            request.ContentType = "application/json";
+            request.ContentLength = data.Length;
+
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+            }
+
+            WebResponse response = request.GetResponse();
+
+            string status = ((HttpWebResponse)response).StatusDescription;
+            return status;
+        }
+        #endregion
+        #endregion
+        #region/********Request-Management********/
+            #region/********LOAD-WIP********/
+        public void LoadRequests()
+        {
+            WebRequest request = WebRequest.Create(basicConnectionString + "RequestList");
+            request.Method = "GET";
+            WebResponse response = request.GetResponse();
+            using (var webserviceResponse = (WebResponse)request.GetResponse())
+            {
+                using (var reader = new StreamReader(webserviceResponse.GetResponseStream()))
+                {
+                    string json = reader.ReadToEnd();
+                    requests = JsonConvert.DeserializeObject<List<Request>>(json);
+                }
+            }
+        }
+        #endregion
+            #region/********GET-WIP********/
+        public IEnumerable GetRequests()
+        {
+            return requests;
+        }
+        #endregion
+        #endregion
     }
 }
