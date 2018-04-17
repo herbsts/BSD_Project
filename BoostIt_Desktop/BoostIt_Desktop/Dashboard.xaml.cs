@@ -107,7 +107,16 @@ namespace BoostIt_Desktop
 
         private void BtnShowMessage_Click(object sender, RoutedEventArgs e)
         {
-
+            Request r = (Request)listMessages.SelectedItem;
+            if (r != null)
+            {
+                MessageBox.Show("Message from user '" + r.user.username + "': \n"+r.message);
+            }
+            else
+            {
+                MessageBox.Show("Select a request first.");
+            }
+            
         }
     }
 }

@@ -19,10 +19,16 @@ namespace BoostIt_Desktop
     /// </summary>
     public partial class EditGroup : Window
     {
+        List<User> allStudents = new List<User>();
+        List<User> studentsAvailable = new List<User>();
+        List<User> studentsAssigned = new List<User>();
         public EditGroup(string username)
         {
             InitializeComponent();
             lblLoggedIn.Content = username;
+            cbGroup.ItemsSource = Database.GetInstance().GetClassDescriptions();
+            cbTeacher.ItemsSource = Database.GetInstance().GetTeachers();
+            studentsAvailable = (List<User>)Database.GetInstance().GetStudents();
         }
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
@@ -97,6 +103,84 @@ namespace BoostIt_Desktop
         private void BtnShowGroupStatistic_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void CbGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string classDescription = cbGroup.SelectedItem.ToString();
+            User teacher = Database.GetInstance().GetTeacherForClass(classDescription);
+            cbTeacher.SelectedItem = teacher;
+            assignedStudents.ItemsSource = Database.GetInstance().GetStudentsForClass(classDescription);
+            allStudents = (List<User>)Database.GetInstance().GetStudents();
+            foreach(User u in assignedStudents.ItemsSource)
+            {
+                allStudents.Remove(u);
+            }
+            availableStudents.ItemsSource = allStudents;
+        }
+
+        private void BtnRightToLeft_Click(object sender, RoutedEventArgs e)
+        {
+            if (availableStudents.SelectedItem != null)
+            {
+                User u = (User)availableStudents.SelectedItem;
+                studentsAssigned.Add(u);
+                studentsAvailable.Remove(u);
+                assignedStudents.ItemsSource = null;
+                availableStudents.ItemsSource = null;
+                assignedStudents.ItemsSource = studentsAssigned;
+                availableStudents.ItemsSource = studentsAvailable;
+                assignedStudents.SelectedItem = null;
+                availableStudents.SelectedItem = null;
+            }
+            else
+            {
+                MessageBox.Show("No Student to assign selected.");
+            }
+        }
+
+        private void BtnLeftToRight_Click(object sender, RoutedEventArgs e)
+        {
+            if (assignedStudents.SelectedItem != null)
+            {
+                User u = (User)assignedStudents.SelectedItem;
+                studentsAvailable.Add(u);
+                studentsAssigned.Remove(u);
+                assignedStudents.ItemsSource = null;
+                availableStudents.ItemsSource = null;
+                assignedStudents.ItemsSource = studentsAssigned;
+                availableStudents.ItemsSource = studentsAvailable;
+                assignedStudents.SelectedItem = null;
+                availableStudents.SelectedItem = null;
+            }
+            else
+            {
+                MessageBox.Show("No Student to unassign selected.");
+            }
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            cbGroup.SelectedItem = null;
+            cbTeacher.SelectedItem = null;
+            assignedStudents.SelectedItem = null;
+            availableStudents.SelectedItem = null;
+            assignedStudents.ItemsSource = null;
+            availableStudents.ItemsSource = null;
+        }
+
+        private void BtnSavechanges_Click(object sender, RoutedEventArgs e)
+        {
+            ClassMember cm;
+            if (cbGroup.SelectedItem.ToString().Length > 0 && cbTeacher.SelectedItem != null && studentsAssigned.Count > 0)
+            {
+                Database.GetInstance().RemoveAllMembersForClass(cbGroup.SelectedItem.ToString());
+                foreach (User u in studentsAssigned)
+                {
+                    cm = new ClassMember((User)cbTeacher.SelectedItem, u, cbGroup.SelectedItem.ToString());
+                    Database.GetInstance().InsertClassMember(cm);
+                }
+            }
         }
     }
 }

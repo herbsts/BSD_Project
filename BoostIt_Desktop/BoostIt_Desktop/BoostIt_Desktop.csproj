@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassMember.cs" />
     <Compile Include="CreateGroup.xaml.cs">
       <DependentUpon>CreateGroup.xaml</DependentUpon>
     </Compile>

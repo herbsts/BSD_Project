@@ -8,12 +8,12 @@ namespace BoostIt_Desktop
 {
     class Request
     {
-        private int request_id { get; set; }
-        private DateTime requestDate { get; set; }
-        private DateTime editDate { get; set; }
-        private string message { get; set; }
-        private string status { get; set; }
-        private User user { get; set; }
+        public int request_id { get; set; }
+        public DateTime requestDate { get; set; }
+        public DateTime editDate { get; set; }
+        public string message { get; set; }
+        public string status { get; set; }
+        public User user { get; set; }
 
         public Request(int request_id, DateTime requestDate, DateTime editDate, string message, string status, User user)
         {

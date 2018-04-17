@@ -51,7 +51,7 @@
         </ScrollViewer>
         <Image Margin="687,25,537,0" Source="pack://application:,,,../Resources/Logo_BoostIT.png" Height="150" VerticalAlignment="Top"/>
         <Label x:Name="lblWelcome" Background="SeaGreen" Content="Recent Messages: " Margin="305,200,160,0" FontSize="26" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" Height="45" VerticalAlignment="Top"/>
-        <ListView x:Name="listMessages" Margin="305,250,159.6,58">
+        <ListView x:Name="listMessages" Margin="305,250,159.6,58" FontSize="18" FontWeight="Bold">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -59,6 +59,5 @@
             </ListView.View>
         </ListView>
         <Button x:Name="btnShowMessage" Content="Open Messge Details" Margin="1084,0,159.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom" Click="BtnShowMessage_Click"/>
-        <Button x:Name="btnShowHistory" Content="Show Message History" Margin="305,0,928.6,25" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="18" Click="BtnShowHistory_Click"/>
     </Grid>
 </Window>

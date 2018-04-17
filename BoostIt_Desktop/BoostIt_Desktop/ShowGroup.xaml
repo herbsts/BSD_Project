@@ -53,16 +53,16 @@
         <Label x:Name="lblInstruction" Background="SeaGreen" Foreground="White" Content="Enter a Group name to continue: " Margin="305,200,159.6,0" FontSize="26" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
         <Label x:Name="lblUsername" Content="Group Name: " Margin="505,270,803.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <TextBox x:Name="txtName" Background="LightGreen" Margin="655,273,529.6,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="34"/>
-        <ListView Margin="305,329,159.6,78">
+        <ListView x:Name="listGroups" Margin="305,329,159.6,78" FontSize="18" FontWeight="Bold">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnSearch" Background="White" Content="Search for Group" Margin="0,273,349.6,0" FontSize="18" FontWeight="Bold" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="155"/>
-        <Button x:Name="btnShowUserDetails" Content="Show Details for selected Group" Margin="989,0,159.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom"/>
-        <Button x:Name="btnDeleteGroup" Content="Delete selected Group" Margin="305,0,928.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom"/>
+        <Button x:Name="btnSearch" Background="White" Content="Search for Group" Margin="0,273,349.6,0" FontSize="18" FontWeight="Bold" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="155" Click="BtnSearch_Click"/>
+        <Button x:Name="btnShowUserDetails" Content="Show Details for selected Group" Margin="989,0,159.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom" Click="BtnShowUserDetails_Click"/>
+        <Button x:Name="btnDeleteGroup" Content="Delete selected Group" Margin="305,0,928.6,25" FontSize="18" FontWeight="Bold" Height="28" VerticalAlignment="Bottom" Click="BtnDeleteGroup_Click"/>
 
     </Grid>
 </Window>

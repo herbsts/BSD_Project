@@ -52,16 +52,16 @@
         <Path Stretch="Uniform" Canvas.Left="21.0463" Canvas.Top="19.9749" Fill="#FF000000" Data="F1 M 53.2929,21.2929L 54.7071,22.7071C 56.4645,24.4645 56.4645,27.3137 54.7071,29.0711L 52.2323,31.5459L 44.4541,23.7677L 46.9289,21.2929C 48.6863,19.5355 51.5355,19.5355 53.2929,21.2929 Z M 31.7262,52.052L 23.948,44.2738L 43.0399,25.182L 50.818,32.9601L 31.7262,52.052 Z M 23.2409,47.1023L 28.8977,52.7591L 21.0463,54.9537L 23.2409,47.1023 Z " Margin="842.11,51.4,552.91,0" Height="40.98" VerticalAlignment="Top" RenderTransformOrigin="0.592,0.702"/>
         <Label x:Name="lblGroupName" Content="Group: " Margin="555,270,755.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblTeacher" Content="Teacher: " Margin="555,329,755.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <Button x:Name="btnSavechanges" Background="LightGray" Content="Save Changes" Margin="642,0,0,25" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130"/>
-        <Button x:Name="btnCancel" Background="LightGray" Content="Cancel" Margin="0,0,514.6,25" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="110"/>
+        <Button x:Name="btnSavechanges" Background="LightGray" Content="Save Changes" Margin="642,0,0,25" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130" Click="BtnSavechanges_Click"/>
+        <Button x:Name="btnCancel" Background="LightGray" Content="Cancel" Margin="0,0,514.6,25" FontSize="18" FontWeight="Bold" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="110" Click="BtnCancel_Click"/>
         <Label x:Name="lblInstruction" Background="SeaGreen" Foreground="White" Content="Select a group: " Margin="405,200,260,0" FontSize="26" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
-        <ListBox Margin="0,427,254.6,0" Height="296" VerticalAlignment="Top" Width="370" HorizontalAlignment="Right"/>
-        <ListBox Margin="402,427,0,0" Height="296" VerticalAlignment="Top" Width="370" HorizontalAlignment="Left"/>
+        <ListBox x:Name="availableStudents" Margin="0,427,254.6,0" Height="296" VerticalAlignment="Top" Width="370" HorizontalAlignment="Right" FontSize="18" FontWeight="Bold"/>
+        <ListBox x:Name="assignedStudents" Margin="402,427,0,0" Height="296" VerticalAlignment="Top" Width="370" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="lblAssigned" Content="Assigned Students: " Margin="405,388,0,358" FontSize="18" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="367"/>
         <Label x:Name="lblAvailable" Content="Available Students: " Margin="0,388,259.6,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Width="365"/>
-        <Button x:Name="btnLeftToRight" Background="LightGray" FontSize="36" Content="&gt;" Margin="775,0,629.6,129" FontWeight="Bold" Height="73" VerticalAlignment="Bottom"/>
-        <Button x:Name="btnRightToLeft" Background="LightGray" FontSize="36" Content="&lt;" Margin="775,499,629.6,0" FontWeight="Bold" Height="73" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbGroup" Margin="723,270,409.6,0" VerticalAlignment="Top" Height="34"/>
+        <Button x:Name="btnLeftToRight" Background="LightGray" FontSize="36" Content="&gt;" Margin="775,0,629.6,129" FontWeight="Bold" Height="73" VerticalAlignment="Bottom" RenderTransformOrigin="0.503,0.503" Click="BtnLeftToRight_Click"/>
+        <Button x:Name="btnRightToLeft" Background="LightGray" FontSize="36" Content="&lt;" Margin="775,499,629.6,0" FontWeight="Bold" Height="73" VerticalAlignment="Top" Click="BtnRightToLeft_Click"/>
+        <ComboBox x:Name="cbGroup" SelectionChanged="CbGroup_SelectionChanged" Margin="723,270,409.6,0" VerticalAlignment="Top" Height="34"/>
         <ComboBox x:Name="cbTeacher" Margin="723,329,409.6,0" VerticalAlignment="Top" Height="34"/>
     </Grid>
 </Window>

@@ -106,7 +106,7 @@ namespace BoostIt_Desktop
         {
             if (listUsers.SelectedItem == null)
             {
-                MessageBox.Show("Select a user first!");
+                MessageBox.Show("Select a user first.");
             }
             else
             {
@@ -139,7 +139,7 @@ namespace BoostIt_Desktop
         {
             if (listUsers.SelectedItem == null)
             {
-                MessageBox.Show("Select a user first!");
+                MessageBox.Show("Select a user first.");
             }
             else
             {

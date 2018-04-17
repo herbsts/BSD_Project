@@ -19,10 +19,13 @@ namespace BoostIt_Desktop
     /// </summary>
     public partial class ShowGroup : Window
     {
+        List<ClassMember> members;
         public ShowGroup(string username)
         {
             InitializeComponent();
             lblLoggedIn.Content = username;
+            listGroups.ItemsSource = Database.GetInstance().GetGroups();
+            members = (List<ClassMember>)listGroups.ItemsSource;
         }
 
         private void BtnShowReference_Click(object sender, RoutedEventArgs e)
@@ -97,6 +100,57 @@ namespace BoostIt_Desktop
         private void BtnShowGroupStatistic_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtName.Text.ToString().Equals(""))
+            {
+                listGroups.ItemsSource = members;
+            }
+            else
+            {
+                List<ClassMember> foundMembers = new List<ClassMember>();
+                foreach (ClassMember m in members)
+                {
+                    if (m.classDescription.Equals(txtName.Text))
+                    {
+                        foundMembers.Add(m);
+                    }
+
+                }
+                listGroups.ItemsSource = foundMembers;
+            }
+        }
+
+        private void BtnShowUserDetails_Click(object sender, RoutedEventArgs e)
+        {
+            if (listGroups.SelectedItem == null)
+            {
+                MessageBox.Show("Select a group first.");
+            }
+            else
+            {
+                MessageBox.Show
+                (
+                    "Class: " + ((ClassMember)listGroups.SelectedItem).classDescription +
+                    "\nTeacher: " + ((ClassMember)listGroups.SelectedItem).teacher +
+                    "\nStudent: " + ((ClassMember)listGroups.SelectedItem).student + "'"
+                );
+            }
+        }
+
+        private void BtnDeleteGroup_Click(object sender, RoutedEventArgs e)
+        {
+            if (listGroups.SelectedItem == null)
+            {
+                MessageBox.Show("Select a group first.");
+            }
+            else
+            {
+                Database.GetInstance().RemoveGroup((ClassMember)listGroups.SelectedItem);
+                listGroups.ItemsSource = Database.GetInstance().GetGroups();
+            }
         }
     }
 }
